@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>Sustaining momentum</title>
+    <title>Kep meeting elements</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
@@ -10,19 +10,23 @@
 .txta {
   width: 100%;
   min-height: 50px;
-  font-family: Arial, sans-serif;
+  font-family: "IBM Plex Sans", sans-serif;
   font-size: 16px;
   overflow: hidden;
   line-height: 1.4;
 }
 button {
-        background: var(--AIMblue);
-    color: var(--white);
-    border: none;
-    padding: 8px 12px;
-    font-family: inherit;
+font-family: "IBM Plex Sans", sans-serif;
+    margin: 20px 10px;
+    background-color: #12195C;
+    color: white;
+    width: 200px;
+    border: solid 2px var(--cream);
+    border-radius: 8px;
     cursor: pointer;
-    border-radius: 4px;
+    padding: 10px;
+    font-size: 1rem;
+    display: block;
 }
 :root {
         --AIMblue: #4353A3;
@@ -123,6 +127,65 @@ td:first-child {
         }
       }*/
 
+/* Modal styles */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1200;
+}
+.modal.open { display: flex; }
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+}
+.modal-content {
+  position: relative;
+  background: #fff;
+  border-radius: 8px;
+  padding: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  width: 92%;
+  max-width: 1000px;
+  max-height: 90vh;
+  overflow: auto;
+}
+.modal-close {
+  background: var(--rust);
+  color: var(--white);
+}
+.static-answer {
+  white-space: pre-wrap;
+  min-height: 50px;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  padding: 8px;
+  border: 1px solid var(--AIMblue);
+  border-radius: 4px;
+  background: #fff;
+}
+#answers-container table {
+  width: 100%;
+  border-collapse: collapse;
+}
+#answers-container td, #answers-container th {
+  padding: 10px;
+  border: 1px solid var(--AIMblue);
+}
+.answers-table-textarea {
+  width: 100%;
+  min-height: 50px;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+  padding: 8px;
+  border: 1px solid var(--AIMblue);
+  border-radius: 4px;
+  resize: vertical;
+}
 </style>
   </head>
 <body>
@@ -199,7 +262,76 @@ td:first-child {
   <button id="export-png" type="button">Export PNG</button>
   <button id="export-pdf" type="button">Export PDF</button>
 </div>
-<button  type="button">Answers</button>
+<!-- Added id to Answers button so JS can open modal -->
+<button id="show-answers" type="button">Answers</button>
+
+<!-- Modal: separate editable answers table -->
+<div id="answers-modal" class="modal" aria-hidden="true">
+  <div class="modal-backdrop" data-close="true"></div>
+  <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="answers-title">
+    <h2 id="answers-title">Model Answers</h2>
+    <div id="answers-container">
+      <table>
+        <colgroup>
+          <col style="width: 20%;">
+          <col style="width: 80%;">
+        </colgroup>
+        <thead>
+          <tr>
+            <th>Characteristic</th>
+            <th>How It Will Be Ensured in the Meeting</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Clarity</td>
+            <td>
+                Share a clear agenda in advance, define the purpose and communicate expected outcomes to all participants.
+            </td>
+          </tr>
+          <tr>
+            <td>Structure</td>
+            <td>
+Organise the agenda logically, assign time slots for each item and set rules for discussion to keep the meeting orderly.
+            </td>
+          </tr>
+          <tr>
+            <td>Participation</td>
+            <td>
+                Invite the right participants, encourage input from all attendees and use facilitation techniques to ensure everyone’s voice is heard.
+            </td>
+          </tr>
+          <tr>
+            <td>Focus</td>
+            <td>
+               Keep discussion on topic, summarise key points periodically and redirect off-topic conversations back to the agenda.
+            </td>
+          </tr>
+          <tr>
+            <td>Follow-through</td>
+            <td>
+                Document decisions, assign action items with owners and deadlines and share minutes promptly after the meeting.
+            </td>
+          </tr>
+          <tr>
+            <td>Engagement (online/hybrid)</td>
+            <td>
+                Use interactive tools (polls, breakout rooms, chat), check in with remote participants frequently and encourage active participation.
+            </td>
+          </tr>
+          <tr>
+            <td>Technical Readiness (online/hybrid)</td>
+            <td>
+Test audio, video and screen-sharing tools in advance; ensure participants know how to use the platform; have a backup plan for technical issues.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+   
+    </div>
+       <button id="close-answers" class="modal-close" aria-label="Close answers">Close</button>
+  </div>
+</div>
 </body>
 <script>
   // Targets all textareas with class "txta"
@@ -321,6 +453,37 @@ document.getElementById('export-pdf').addEventListener('click', async () => {
 
   pdf.save('platforms.pdf');
 });
+</script>
+
+<!-- Modal snapshot JS -->
+<script>
+(function(){
+  const showBtn = document.getElementById('show-answers');
+  const modal = document.getElementById('answers-modal');
+  const closeBtn = document.getElementById('close-answers');
+  const backdrop = modal.querySelector('.modal-backdrop');
+  const answerTextareas = modal.querySelectorAll('.answers-table-textarea');
+
+  function openModal() {
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    closeBtn.focus();
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    showBtn.focus();
+  }
+
+  showBtn.addEventListener('click', openModal);
+  closeBtn.addEventListener('click', closeModal);
+  backdrop.addEventListener('click', closeModal);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+  });
+})();
 </script>
 
 </html>
