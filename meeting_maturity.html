@@ -19,47 +19,117 @@
     --lightBlue: #AEBAE4;
     }
     
-input[type="range"] {
-  accent-color: var(--darkBlue);
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.inputCard {
-  height: 200px;
-}
 body {
-  font-family: "IBM-Plex-Sans", sans-serif;
-}
-.reflectionForm {
-  border: grey 1px solid;
-  border-radius: 8px;
-  width: fit-content;
-  text-align: center;
-  padding: 10px;
-  margin: auto;
+   font-family: "IBM-Plex-Sans", sans-serif;
+    padding: 20px;
+    min-height: 100vh;
 }
 
-.gatherInputs {
-  display: flex;
-  justify-content: center;
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
-.formLayout {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  flex-wrap: wrap;
+
+h1 {
+    color: var(--darkBlue);
+    margin-bottom: 10px;
+    font-size: 28px;
 }
-#displayResult {
-  max-width: 884px;
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-  text-align: left;
-  line-height: 1.5;
+
+.legend {
+    margin-bottom: 30px;
+    padding: 15px;
+    background: #f7fafc;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #4a5568;
+    line-height: 1.6;
 }
+
+.legend-title {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--darkBlue);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 16px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+th {
+    background: var(--darkBlue);
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+th:first-child {
+    border-radius: 8px 0 0 0;
+}
+
+th:last-child {
+    border-radius: 0 8px 0 0;
+}
+
+td:first-child {
+    font-weight: 500;
+    color: #2d3748;
+    max-width: 300px;
+}
+
+.rating-cell {
+    text-align: center;
+}
+
+.rating-btn {
+    width: 40px;
+      font-family: "IBM Plex Sans", sans-serif;
+    height: 40px;
+    border: 2px solid var(--lightBlue);
+    background: white;
+    border-radius: 50%;
+    cursor: pointer;
+    font-weight: 600;
+    color:  var(--AIMblue);
+    transition: all 0.2s ease;
+    font-size: 14px;
+}
+
+.rating-btn:hover {
+    border-color: var(--AIMblue);
+    transform: scale(1.1);
+    background: #edf2f7;
+}
+
+.rating-btn.selected {
+  background-color: #12195C;
+    border-color: #12195C;
+    color: white;
+    transform: scale(1.15);
+}
+
 
 button {
-  font-family: "IBM Plex Sans", sans-serif;
-  background-color: #12195C;
+
+
   position: relative;
   color: white;
   width: 200px;
@@ -76,182 +146,216 @@ button:hover {
   color: #12195C;
   border: solid 2px #12195C;
 }
-
-
-datalist {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  writing-mode: vertical-lr;
-  width: 200px;
+.results {
+    margin-top: 30px;
+    padding: 20px;
+    background: #f7fafc;
+    border-radius: 8px;
+    display: none;
 }
 
-option {
-  padding: 0;
+.results.show {
+    display: block;
 }
 
-input[type="range"] {
-  width: 200px;
-  margin: 0;
+.results h2 {
+    color: #2d3748;
+    margin-bottom: 15px;
+    font-size: 20px;
 }
 
-</style>
+.result-item {
+    margin-bottom: 12px;
+    padding: 12px;
+    background: white;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.result-label {
+    font-weight: 500;
+    color: #4a5568;
+}
+
+.result-value {
+    font-weight: 700;
+    color: #667eea;
+    font-size: 18px;
+}
+
+.average {
+    font-size: 24px;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+td > h4 {
+  margin-bottom: 10px;
+}
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    th, td {
+        padding: 12px 8px;
+        font-size: 13px;
+    }
+
+    .rating-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 13px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+}
+    </style>
 </head>
 <body>
-<div class="reflectionForm">
-  <div class="formLayout">
-  <div class="inputCard">
-    <p>
-        <strong>
-            Meeting design
-        </strong><br>
-Agendas and meeting structures are consistent and appropriate for the meeting type.
-</p>
-    <p>1 | 2 | 3 | 4 | 5 </p>
-    <br>
-    <input
-        id="intensity"
-        type="range"
-        min="1" 
-        max="5"
-         autocomplete="off">
-    </input>
-  <p id="intensityValue"></p>
-  </div>
+    <div class="container">
+        <h1>Meeting Maturity Assessment</h1>
+        
+        <div class="legend">
+            <div class="legend-title">Rating Scale:</div>
+            <strong>1</strong> = Individual (Ad-hoc, inconsistent) | 
+            <strong>2</strong> = Professional (Basic standards) | 
+            <strong>3</strong> = Effective (Structured, tailored) | 
+            <strong>4</strong> = Systematised (Integrated, monitored) | 
+            <strong>5</strong> = Optimised/World Class (Continuous improvement)
+        </div>
 
-  <div class="inputCard">
-    <p>
-        <strong>
-         Meeting skills
-        </strong><br>
-Meeting leaders and participants are trained in facilitation, participation and outcome documentation
-</p>
-    <p>1 | 2 | 3 | 4 | 5 </p>
-    <br>
-        <input
-        id="frequency"
-        type="range"
-        min="1" 
-        max="5"
-         autocomplete="off">
-    </input>
-    <p id="frequencyValue"></p>
-</div>  
-  <div class="inputCard">
-        <p>
-        <strong>
-        Stakeholder satisfaction
-        </strong><br>
-Feedback from participants is collected and used to improve meetings.
-</p>
-    <p>1 | 2 | 3 | 4 | 5 </p>
-    <br>
-    <input
-        id="duration"
-        type="range"
-        min="1" 
-        max="5"
-         autocomplete="off">
-    </input>
-    <p id="durationValue"></p>
-</div>
-<div class="inputCard">
-          <p>
-        <strong>
-        Facilities, technology and resources
-        </strong><br>
-Technology and resources are consistently available and support effective meetings.
-</p>
-    <p>1 | 2 | 3 | 4 | 5 </p>
-    <br>
-    <input
-        id="strength"
-        type="range"
-        min="1" 
-        max="5"
-         autocomplete="off">
-    </input>
-    <p id="strengthValue"></p>
-</div>
-  <div class="inputCard">
-           <p>
-        <strong>
-      Cultural ownership
-        </strong><br>
-Meeting behaviours reflect organisational values and employees are empowered to uphold standards.
-</p>
-    <p>1 | 2 | 3 | 4 | 5 </p>
-    <br>
-    <input
-        id="flexible"
-        type="range"
-        min="1" 
-        max="5"
-         autocomplete="off">
-    </input>
-    <p id="flexibleValue"></p>
-</div>
-</div>
-<div class="gatherInputs">
-  <button onclick=submit()>Submit</button>
-  </div>
-    <div class="gatherInputs">
-  <p id="displayResult"></p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Focus Area</th>
+                    <th class="rating-cell">1</th>
+                    <th class="rating-cell">2</th>
+                    <th class="rating-cell">3</th>
+                    <th class="rating-cell">4</th>
+                    <th class="rating-cell">5</th>
+                </tr>
+            </thead>
+            <tbody id="assessmentBody">
+                <tr data-area="meeting-design">
+                    <td><h4>Meeting design</h4>Agendas and meeting structures are consistent and appropriate for the meeting type.</td>
+                    <td class="rating-cell"><button class="rating-btn" data-value="1">1</button></td>
+                    <td class="rating-cell"><button class="rating-btn" data-value="2">2</button></td>
+                    <td class="rating-cell"><button class="rating-btn" data-value="3">3</button></td>
+                    <td class="rating-cell"><button class="rating-btn" data-value="4">4</button></td>
+                    <td class="rating-cell"><button class="rating-btn" data-value="5">5</button></td>
+                </tr>
+                <tr data-area="meeting-skills">
+                    <td><h4>Meeting skills</h4>Meeting leaders and participants are trained in facilitation, participation and outcome documentation.</td>
+                    <td class="rating-cell"><button class="rating-btn" data-value="1">1</button></td>
+                    <td class="rating-cell"><button class="rating-btn" data-value="2">2</button></td>
+                    <td class="rating-cell"><button class="rating-btn" data-value="3">3</button></td>
+                    <td class="rating-cell"><button class="rating-btn" data-value="4">4</button></td>
+                    <td class="rating-cell"><button class="rating-btn" data-value="5">5</button></td>
+                </tr>
+                <tr data-area="stakeholder-satisfaction">
+                    <td><h4>Stakeholder satisfaction</h4>Feedback from participants is collected and used to improve meetings.</td>
+                    <td class="rating-cell"><button class="rating-btn" data-value="1">1</button></td>
+                    <td class="rating-cell"><button class="rating-btn" data-value="2">2</button></td>
+                    <td class="rating-cell"><button class="rating-btn" data-value="3">3</button></td>
+                    <td class="rating-cell"><button class="rating-btn" data-value="4">4</button></td>
+                    <td class="rating-cell"><button class="rating-btn" data-value="5">5</button></td>
+                </tr>
+                <tr data-area="facilities-technology">
+                    <td><h4>Facilities, technology and resources</h4>Technology and resources are consistently available and support effective meetings.</td>
+                    <td class="rating-cell"><button class="rating-btn" data-value="1">1</button></td>
+                    <td class="rating-cell"><button class="rating-btn" data-value="2">2</button></td>
+                    <td class="rating-cell"><button class="rating-btn" data-value="3">3</button></td>
+                    <td class="rating-cell"><button class="rating-btn" data-value="4">4</button></td>
+                    <td class="rating-cell"><button class="rating-btn" data-value="5">5</button></td>
+                </tr>
+                <tr data-area="cultural-ownership">
+                    <td><h4>Cultural ownership</h4>Meeting behaviours reflect organisational values and employees are empowered to uphold standards.</td>
+                    <td class="rating-cell"><button class="rating-btn" data-value="1">1</button></td>
+                    <td class="rating-cell"><button class="rating-btn" data-value="2">2</button></td>
+                    <td class="rating-cell"><button class="rating-btn" data-value="3">3</button></td>
+                    <td class="rating-cell"><button class="rating-btn" data-value="4">4</button></td>
+                    <td class="rating-cell"><button class="rating-btn" data-value="5">5</button></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="results" id="results">
+            <h2>Your Ratings:</h2>
+            <div id="resultsList"></div>
+            <div class="average" id="average"></div>
+        </div>
     </div>
-</div>
-  </div>
+
+    <script>
+        const ratings = {};
+        const focusAreas = [
+            'Meeting Design',
+            'Meeting Skills',
+            'Stakeholder Satisfaction',
+            'Facilities, Technology and Resources',
+            'Cultural Ownership'
+        ];
+
+        document.querySelectorAll('.rating-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const row = this.closest('tr');
+                const area = row.dataset.area;
+                const value = parseInt(this.dataset.value);
+
+                row.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('selected'));
+                this.classList.add('selected');
+
+                ratings[area] = value;
+                updateResults();
+            });
+        });
+
+        function updateResults() {
+            const ratingCount = Object.keys(ratings).length;
+            
+            if (ratingCount > 0) {
+                document.getElementById('results').classList.add('show');
+                
+                const resultsList = document.getElementById('resultsList');
+                resultsList.innerHTML = '';
+                
+                let total = 0;
+                let index = 0;
+                
+                for (const [area, value] of Object.entries(ratings)) {
+                    const div = document.createElement('div');
+                    div.className = 'result-item';
+                    div.innerHTML = `
+                        <span class="result-label">${focusAreas[index]}</span>
+                        <span class="result-value">${value}</span>
+                    `;
+                    resultsList.appendChild(div);
+                    total += value;
+                    index++;
+                }
+
+                if (ratingCount === 5) {
+                    const average = (total / ratingCount).toFixed(2);
+                    document.getElementById('average').innerHTML = `
+                        <div>Overall Average Score</div>
+                        <div style="font-size: 36px; margin-top: 10px; font-weight: 700;">${average}</div>
+                    `;
+                } else {
+                    document.getElementById('average').innerHTML = `
+                        <div style="font-size: 16px;">Complete all ratings to see your average score</div>
+                        <div style="margin-top: 8px; font-size: 14px; opacity: 0.9;">${ratingCount} of 5 completed</div>
+                    `;
+                }
+            } else {
+                document.getElementById('results').classList.remove('show');
+            }
+        }
+    </script>
 </body>
-<script>
-    const liveInputOne = document.getElementById('intensity');
-    liveInputOne.addEventListener('input', (e) => {
-    document.getElementById("intensityValue").innerHTML = e.target.value;
-});
-
-const liveInputTwo = document.getElementById('frequency');
-    liveInputTwo.addEventListener('input', (e) => {
-    document.getElementById("frequencyValue").innerHTML = e.target.value;
-});
-
-const liveInputThree = document.getElementById('duration');
-    liveInputThree.addEventListener('input', (e) => {
-    document.getElementById("durationValue").innerHTML = e.target.value;
-});
-
-const liveInputFour = document.getElementById('strength');
-    liveInputFour.addEventListener('input', (e) => {
-    document.getElementById("strengthValue").innerHTML = e.target.value;
-});
-
-const liveInputFive = document.getElementById('flexible');
-    liveInputFive.addEventListener('input', (e) => {
-    document.getElementById("flexibleValue").innerHTML = e.target.value;
-});
-
-function submit() {
-  let answer = document.getElementById("displayResult");
-  var a = document.getElementById("intensity").value;
-  let anumber = parseInt(a);
-  var b = document.getElementById("frequency").value;
-  let bnumber = parseInt(b);
-  var c = document.getElementById("duration").value;
-  let cnumber = parseInt(c);
-  var d = document.getElementById("strength").value;
-  let dnumber = parseInt(d);
-  var f = document.getElementById("flexible").value;
-  let fnumber = parseInt(f);
-  console.log(anumber, bnumber, cnumber, dnumber, fnumber);
-  let result = anumber + bnumber + cnumber + dnumber + fnumber;
-  console.log(result);
-  
-
-  return answer.innerHTML =' Your total score is '+ result +'. <br><br>';
-//  if (result <= 11) {
-//    answer.innerHTML = 
-//  } else if (result > 7 && result < 12) {
-//    answer.innerHTML = 'Your total score is '+ result +'. Based on this short survery, your fitness level is average. You are moderately sedentary and should increase your level of activity.';
-//  } else {
-//    answer.innerHTML = 'Your total score is '+ result +'. Based on this short survery, your fitness level is very good. Congratulations! Maintain your present level of activity.';
-//  }
-}
-</script>
-<html>
+</html>
