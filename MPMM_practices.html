@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>MPMM Practices</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+<style>
+.txta {
+    width: 100%;
+    min-height: 100px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    overflow: hidden;
+    line-height: 1.4;
+}
+
+:root {
+    --AIMblue: #4353A3;
+    --darkBlue: #38416D;
+    --teal: #5DC8B9;
+    --cream: #F1EEDE;
+    --grey: #e7e9ec;
+    --rust: #AF4510;
+    --navy: #12195C;
+    --white: #ffffff;
+    --lightBlue: #AEBAE4;
+}
+
+input {
+    border: none;
+    width: fit-content;
+
+}
+
+body {
+    font-family: "IBM Plex Sans", sans-serif;
+}
+
+table {
+    width: 100%;
+    margin:0;
+    padding:0;
+    border-collapse: collapse;
+    border-spacing: 0;
+    text-align: left;
+}
+
+table tr {
+    border: 1px solid var(--AIMblue);
+    padding: 5px;
+}
+
+table th, table td {
+    border: 1px solid var(--AIMblue);
+    padding: 10px;
+}
+
+table th {
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    background-color: var(--darkBlue);
+    color: var(--white);
+}
+
+tr:nth-child(even) {
+    background-color: var(--grey); /*Grey of torment!*/
+} 
+
+tr:nth-child(odd) {
+    background-color: white; 
+} 
+
+.high {
+background-color: orange;
+}
+
+td:first-child {
+  font-weight: bold;
+}
+ @media screen and (max-width: 700px) {
+
+table {
+    border: 0;
+    border: none;
+}
+
+table thead {
+    display: none;
+}
+
+table tr {
+    margin-bottom: 10px;
+    display: block;
+    border-bottom: 2px solid var(--AIMblue);
+    border-left: 1px solid var(--lightBlue);
+    border-right: 1px solid var(--lightBlue);
+    border-top: 1px solid var(--lightBlue);
+}
+
+table td {
+    display: block;
+    text-align: right;
+    font-size: 13px;
+    border-bottom: 1px dotted var(--rust);
+    border-left: 0px dotted #ccc;
+    border-right: 0px dotted #ccc;
+    border-top: 0px dotted #ccc;
+}
+
+table td:last-child {
+    border-bottom: 0;
+}
+
+table td:before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+}
+col {
+    width: 100% !important;
+}
+}
+
+</style>
+  </head>
+<body>
+<table>
+ <colgroup>
+        <col style="width: 12%;">
+        <col style="width: 22%;">
+        <col style="width: 22%;">
+        <col style="width: 22%;">
+        <col style="width: 22%;">
+      </colgroup>
+  <thead>
+    <th>Focus Area</th>
+    <th>Level 2: Professional</th>
+    <th>Level 3: Effective</th>
+  <th>Level 4: Systematised</th>
+  <th>Level 5: Optimised / World Class</th>
+  </thead>
+  <tbody>
+    <tr>
+        <td data-label="Focus Area">
+           Description
+        </td>
+        <td data-label="Level 2: Professional">
+           Professional meeting standards are established; leaders ensure adherence.
+        </td>
+        <td data-label="Level 3: Effective">
+          Meeting processes are defined for specific business unit outcomes.
+        </td>
+            <td data-label="Level 4: Systematised">
+          Processes are harmonised organisation-wide with monitoring and improvement.
+        </td>
+        <td data-label="Level 5: Optimised / World Class">
+           Meetings are fully aligned with organisational values and strategy; continuously optimised.
+        </td>
+    </tr>
+    <tr>
+        <td data-label="Focus Area">
+ Meeting Design
+        </td>
+        <td data-label="Level 2: Professional">
+         Practices documented; roles and outcomes defined.
+        </td>
+        <td data-label="Level 3: Effective">
+         Predictable structures for each unit; decisions and processes documented.
+        </td>
+            <td data-label="Level 4: Systematised">
+         Integrated across units; standardised structures; harmonised practices.
+        </td>
+        <td data-label="Level 5: Optimised / World Class">
+          Reflect organisational values; evolve through experimentation; proactive design for new initiatives.
+        </td>
+    </tr>
+     <tr>
+        <td data-label="Focus Area">
+         Meeting Skills
+        </td>
+        <td data-label="Level 2: Professional">
+           Leaders follow documented practices; records provide evidence.
+        </td>
+        <td data-label="Level 3: Effective">
+          Training and mentoring for leaders and participants; outcomes consistently documented.
+        </td>
+            <td data-label="Level 4: Systematised">
+         Ongoing training, coaching and performance discussions; facilitation recognised as a core skill.
+        </td>
+        <td data-label="Level 5: Optimised / World Class">
+           Facilitation is a recognised organisational competency; continuous skill improvement supported.
+        </td>
+    </tr>
+     <tr>
+        <td data-label="Focus Area">
+           Stakeholder Satisfaction
+        </td>
+        <td data-label="Level 2: Professional">
+          Participants empowered to require adherence to practices.
+        </td>
+        <td data-label="Level 3: Effective">
+          Key stakeholders identified; satisfaction metrics collected; ineffective meetings addressed.
+        </td>
+            <td data-label="Level 4: Systematised">
+          Feedback consistently collected; corrective actions applied; metrics regularly reviewed.
+        </td>
+        <td data-label="Level 5: Optimised / World Class">
+           Stakeholder expectations consistently met/exceeded; external observers experience uniform quality.
+        </td>
+    </tr>
+     <tr>
+        <td data-label="Focus Area">
+         Facilities, Technology & Resources
+        </td>
+        <td data-label="Level 2: Professional">
+         Basic support for scheduling, holding and recording meetings.
+        </td>
+        <td data-label="Level 3: Effective">
+         Centralised records: facilities and technology support designed processes.
+        </td>
+            <td data-label="Level 4: Systematised">
+         Automation for recurring tasks; content centralised; performance metrics consistently tracked.
+        </td>
+        <td data-label="Level 5: Optimised / World Class">
+           Advanced technology and facilities; access to experimental tools; support for continuous improvement.
+        </td>
+    </tr>
+     <tr>
+        <td data-label="Focus Area">
+          Cultural Ownership
+        </td>
+        <td data-label="Level 2: Professional">
+         Meeting expectations communicated across units
+        </td>
+        <td data-label="Level 3: Effective">
+         Participation expected and supported; practices updated with employee input.
+        </td>
+            <td data-label="Level 4: Systematised">
+          Meetings reflect organisational culture; shared ownership of success; recognition for effective skills.
+        </td>
+        <td data-label="Level 5: Optimised / World Class">
+           Meetings embody organisational values; design optimises outcomes and culture; past outcomes reviewed for impact.
+        </td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>
