@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Meeting performance maturity model quiz</title>
+  <meta charset="UTF-8" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+<style>
+ :root{
+    --AIMblue: #4353A3;
+    --darkBlue: #38416D;
+    --teal: #5DC8B9;
+    --cream: #F1EEDE;
+    --grey: #ebebeb;
+    --rust: #AF4510;
+    --navy: #12195C;
+    --white: #ffffff;
+    --lightBlue: #AEBAE4;
+    }
+    
+input[type="range"] {
+  accent-color: var(--darkBlue);
+}
+
+.inputCard {
+  height: 200px;
+}
+body {
+  font-family: "IBM-Plex-Sans", sans-serif;
+}
+.reflectionForm {
+  border: grey 1px solid;
+  border-radius: 8px;
+  width: fit-content;
+  text-align: center;
+  padding: 10px;
+  margin: auto;
+}
+
+.gatherInputs {
+  display: flex;
+  justify-content: center;
+}
+.formLayout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+#displayResult {
+  max-width: 884px;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  text-align: left;
+  line-height: 1.5;
+}
+
+button {
+  font-family: "IBM Plex Sans", sans-serif;
+  background-color: #12195C;
+  position: relative;
+  color: white;
+  width: 200px;
+  border: solid 2px var(--cream);
+  border-radius: 8px;
+  margin-top: 10px;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 1rem;
+}
+
+button:hover {
+  background-color: var(--lightBlue);
+  color: #12195C;
+  border: solid 2px #12195C;
+}
+
+
+datalist {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  writing-mode: vertical-lr;
+  width: 200px;
+}
+
+option {
+  padding: 0;
+}
+
+input[type="range"] {
+  width: 200px;
+  margin: 0;
+}
+
+</style>
+</head>
+<body>
+<div class="reflectionForm">
+  <div class="formLayout">
+  <div class="inputCard">
+    <p>
+        <strong>
+            Meeting design
+        </strong><br>
+Agendas and meeting structures are consistent and appropriate for the meeting type.
+</p>
+    <p>1 | 2 | 3 | 4 | 5 </p>
+    <br>
+    <input
+        id="intensity"
+        type="range"
+        min="1" 
+        max="5"
+         autocomplete="off">
+    </input>
+  <p id="intensityValue"></p>
+  </div>
+
+  <div class="inputCard">
+    <p>
+        <strong>
+         Meeting skills
+        </strong><br>
+Meeting leaders and participants are trained in facilitation, participation and outcome documentation
+</p>
+    <p>1 | 2 | 3 | 4 | 5 </p>
+    <br>
+        <input
+        id="frequency"
+        type="range"
+        min="1" 
+        max="5"
+         autocomplete="off">
+    </input>
+    <p id="frequencyValue"></p>
+</div>  
+  <div class="inputCard">
+        <p>
+        <strong>
+        Stakeholder satisfaction
+        </strong><br>
+Feedback from participants is collected and used to improve meetings.
+</p>
+    <p>1 | 2 | 3 | 4 | 5 </p>
+    <br>
+    <input
+        id="duration"
+        type="range"
+        min="1" 
+        max="5"
+         autocomplete="off">
+    </input>
+    <p id="durationValue"></p>
+</div>
+<div class="inputCard">
+          <p>
+        <strong>
+        Facilities, technology and resources
+        </strong><br>
+Technology and resources are consistently available and support effective meetings.
+</p>
+    <p>1 | 2 | 3 | 4 | 5 </p>
+    <br>
+    <input
+        id="strength"
+        type="range"
+        min="1" 
+        max="5"
+         autocomplete="off">
+    </input>
+    <p id="strengthValue"></p>
+</div>
+  <div class="inputCard">
+           <p>
+        <strong>
+      Cultural ownership
+        </strong><br>
+Meeting behaviours reflect organisational values and employees are empowered to uphold standards.
+</p>
+    <p>1 | 2 | 3 | 4 | 5 </p>
+    <br>
+    <input
+        id="flexible"
+        type="range"
+        min="1" 
+        max="5"
+         autocomplete="off">
+    </input>
+    <p id="flexibleValue"></p>
+</div>
+</div>
+<div class="gatherInputs">
+  <button onclick=submit()>Submit</button>
+  </div>
+    <div class="gatherInputs">
+  <p id="displayResult"></p>
+    </div>
+</div>
+  </div>
+</body>
+<script>
+    const liveInputOne = document.getElementById('intensity');
+    liveInputOne.addEventListener('input', (e) => {
+    document.getElementById("intensityValue").innerHTML = e.target.value;
+});
+
+const liveInputTwo = document.getElementById('frequency');
+    liveInputTwo.addEventListener('input', (e) => {
+    document.getElementById("frequencyValue").innerHTML = e.target.value;
+});
+
+const liveInputThree = document.getElementById('duration');
+    liveInputThree.addEventListener('input', (e) => {
+    document.getElementById("durationValue").innerHTML = e.target.value;
+});
+
+const liveInputFour = document.getElementById('strength');
+    liveInputFour.addEventListener('input', (e) => {
+    document.getElementById("strengthValue").innerHTML = e.target.value;
+});
+
+const liveInputFive = document.getElementById('flexible');
+    liveInputFive.addEventListener('input', (e) => {
+    document.getElementById("flexibleValue").innerHTML = e.target.value;
+});
+
+function submit() {
+  let answer = document.getElementById("displayResult");
+  var a = document.getElementById("intensity").value;
+  let anumber = parseInt(a);
+  var b = document.getElementById("frequency").value;
+  let bnumber = parseInt(b);
+  var c = document.getElementById("duration").value;
+  let cnumber = parseInt(c);
+  var d = document.getElementById("strength").value;
+  let dnumber = parseInt(d);
+  var f = document.getElementById("flexible").value;
+  let fnumber = parseInt(f);
+  console.log(anumber, bnumber, cnumber, dnumber, fnumber);
+  let result = anumber + bnumber + cnumber + dnumber + fnumber;
+  console.log(result);
+  
+
+  return answer.innerHTML =' Your total score is '+ result +'. <br><br>';
+//  if (result <= 11) {
+//    answer.innerHTML = 
+//  } else if (result > 7 && result < 12) {
+//    answer.innerHTML = 'Your total score is '+ result +'. Based on this short survery, your fitness level is average. You are moderately sedentary and should increase your level of activity.';
+//  } else {
+//    answer.innerHTML = 'Your total score is '+ result +'. Based on this short survery, your fitness level is very good. Congratulations! Maintain your present level of activity.';
+//  }
+}
+</script>
+<html>
