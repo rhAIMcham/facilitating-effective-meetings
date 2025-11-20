@@ -1,24 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title>SMART Objective</title>
+    <meta charset="UTF-8" />    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outlook Email</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
-<style>
-:root {
-    --AIMblue: #4353A3;
-    --darkBlue: #38416D;
-    --teal: #5DC8B9;
-    --cream: #F1EEDE;
-    --grey: #e7e9ec;
-    --rust: #AF4510;
-    --navy: #12195C;
-    --white: #ffffff;
-    --lightBlue: #AEBAE4;
-}
 
-body {
-    font-family: "IBM Plex Sans", sans-serif;
-}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f3f2f1;
+            padding: 20px;
+        }
+        .email-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            border: 1px solid #d1d1d1;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .email-header {
+            background-color: #0078d4;
+            color: white;
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .email-subject {
+            padding: 20px 20px 10px 20px;
+            border-bottom: 1px solid #edebe9;
+        }
+        .subject-line {
+            font-size: 18px;
+            font-weight: 600;
+            color: #323130;
+            margin-bottom: 15px;
+        }
+        .email-meta {
+            font-size: 12px;
+            color: #605e5c;
+            line-height: 1.6;
+        }
+        .meta-row {
+            display: flex;
+            margin-bottom: 6px;
+        }
+        .meta-label {
+            font-weight: 600;
+            min-width: 60px;
+        }
+        .meta-value {
+            color: #323130;
+        }
+        .email-body {
+            padding: 30px 20px;
+            font-size: 14px;
+            color: #323130;
+            line-height: 1.6;
+        }
+        .email-body p {
+            margin-bottom: 16px;
+        }
+        .email-body strong {
+            font-weight: 600;
+        }
+        .email-body ul {
+            margin-left: 20px;
+            margin-bottom: 16px;
+        }
+        .email-body li {
+            margin-bottom: 8px;
+        }
+        .teams-link {
+            color: #0078d4;
+            text-decoration: none;
+        }
+        .teams-link:hover {
+            text-decoration: underline;
+        }
+        .signature {
+            margin-top: 24px;
+            color: #605e5c;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="email-header">
+            Outlook Mail
+        </div>
+        
+        <div class="email-subject">
+            <div class="subject-line">
+                Agenda for Project Planning Meeting – Tuesday, 15th October, 10:00–11:30 AM
+            </div>
+            <div class="email-meta">
+                <div class="meta-row">
+                    <span class="meta-label">From:</span>
+                    <span class="meta-value">[Your Name] &lt;yourname@company.com&gt;</span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-label">Sent:</span>
+                    <span class="meta-value">Monday, 14 October 2024 2:30 PM</span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-label">To:</span>
+                    <span class="meta-value">Project Team</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="email-body">
+            <p>Dear Team,</p>
+            
+            <p>Please find attached the agenda for our upcoming Project Planning Meeting scheduled for <strong>Tuesday, 15th October at 10:00 AM</strong> (via Microsoft Teams).</p>
+            
+            <p><strong>Purpose:</strong> To finalise the project timeline and assign responsibilities for Phase 2.</p>
+            
+            <p><strong>Expected Outcomes:</strong></p>
+            <ul>
+                <li>Confirm project milestones and deadlines.</li>
+                <li>Assign key roles and responsibilities.</li>
+                <li>Identify immediate resource needs.</li>
+            </ul>
+            
+            <p>Please review the attached project summary report before the meeting.</p>
+            
+            <p><strong>Join via:</strong> <a href="#" class="teams-link">[Teams Meeting Link]</a></p>
+            
+            <div class="signature">
+                <p>Kind regards,</p>
+                <p><strong>[Your Name]</strong><br>
+                Meeting Facilitator</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
