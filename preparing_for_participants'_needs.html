@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>SMART Objective</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+<style>
+.txta {
+    width: 100%;
+    min-height: 100px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    overflow: hidden;
+    line-height: 1.4;
+}
+
+:root {
+    --AIMblue: #4353A3;
+    --darkBlue: #38416D;
+    --teal: #5DC8B9;
+    --cream: #F1EEDE;
+    --grey: #e7e9ec;
+    --rust: #AF4510;
+    --navy: #12195C;
+    --white: #ffffff;
+    --lightBlue: #AEBAE4;
+}
+
+input {
+    border: none;
+    width: fit-content;
+
+}
+
+body {
+    font-family: "IBM Plex Sans", sans-serif;
+}
+
+table {
+    width: 100%;
+    margin:0;
+    padding:0;
+    border-collapse: collapse;
+    border-spacing: 0;
+    text-align: left;
+}
+
+table tr {
+    border: 1px solid var(--AIMblue);
+    padding: 5px;
+}
+
+table th, table td {
+    border: 1px solid var(--AIMblue);
+    padding: 10px;
+}
+
+table th {
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    background-color: var(--darkBlue);
+    color: var(--white);
+}
+
+tr:nth-child(even) {
+    background-color: var(--grey); /*Grey of torment!*/
+} 
+
+tr td:first-child {
+  /* Styles for the first td of each row */
+  font-weight: bold;
+}
+tr:nth-child(odd) {
+    background-color: white; 
+} 
+
+.high {
+background-color: orange;
+}
+/* 
+ @media screen and (max-width: 700px) {
+
+table {
+    border: 0;
+    border: none;
+}
+
+table thead {
+    display: none;
+}
+
+table tr {
+    margin-bottom: 10px;
+    display: block;
+    border-bottom: 2px solid var(--AIMblue);
+    border-left: 1px solid var(--lightBlue);
+    border-right: 1px solid var(--lightBlue);
+    border-top: 1px solid var(--lightBlue);
+}
+
+table td {
+    display: block;
+    text-align: right;
+    font-size: 13px;
+    border-bottom: 1px dotted var(--rust);
+    border-left: 0px dotted #ccc;
+    border-right: 0px dotted #ccc;
+    border-top: 0px dotted #ccc;
+}
+
+table td:last-child {
+    border-bottom: 0;
+}
+
+table td:before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+}
+} */
+
+</style>
+  </head>
+<body>
+<table>
+ <colgroup>
+        <col style="width: 20%;">
+        <col style="width: 40%;">
+        <col style="width: 40%;">
+      </colgroup>
+  <thead>
+    <th>Participant type</th>
+    <th>Typical needs</th>
+    <th>Example</th>
+  </thead>
+  <tbody>
+    <tr>
+        <td data-label="Participant type">
+        Senior executives or decision-makers
+        </td>
+        <td data-label="Typical needs">
+        High-level insights on key issues, decisions and implications.
+        </td>
+        <td data-label="Best preparation approach">
+        Provide a one-page briefing or executive summary. Focus on implications and next steps.
+        </td>
+    </tr>
+    <tr>
+        <td data-label="Participant type">
+        Technical or subject matter experts
+        </td>
+        <td data-label="Typical needs">
+        Access to detailed data, reports or technical analysis.
+        </td>
+        <td data-label="Best preparation approach">
+        Share comprehensive documents or data in advance and specify which sections need review.
+        </td>
+    </tr>
+    <tr>
+        <td data-label="Participant type">
+        Operational staff or team members
+        </td>
+        <td data-label="Typical needs">
+        Clarity on practical issues, current progress and next actions.
+        </td>
+        <td data-label="Best preparation approach">
+    Offer background context and outline expectations for their input during discussions.
+        </td>
+    </tr>
+    <tr>
+        <td data-label="Participant type">
+        Stakeholders or partners
+        </td>
+        <td data-label="Typical needs">
+        Understanding of the meeting’s purpose, context and potential impact.
+        </td>
+        <td data-label="Best preparation approach">
+        Distribute summary materials that explain the discussion’s relevance and their role in it.
+        </td>
+    </tr>
+    <tr>
+        <td data-label="Participant type">
+        External participants (e.g., clients, contractors)
+        </td>
+        <td data-label="Typical needs">
+        Awareness of organisational background, project scope and objectives.
+        </td>
+        <td data-label="Best preparation approach">
+        Provide a short orientation or briefing document to align them with internal perspectives.
+        </td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>
