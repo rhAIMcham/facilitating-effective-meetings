@@ -465,6 +465,10 @@
         </div>
     </div>
 
+    <!-- Add html2canvas and jsPDF (CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
     <script>
         let objectiveCount = 1;
         let outcomeCount = 1;
@@ -527,12 +531,20 @@
             }
         }
 
-        function exportToPDF() {
+        async function exportToPDF() {
+            const { jsPDF } = window.jspdf;
+            
             // Gather all form data
             const date = document.getElementById('date').value;
-            const time = document.getElementById('time').value;
+            const timeStart = document.getElementById('time-start').value;
+            const timeEnd = document.getElementById('time-end').value;
             const location = document.getElementById('location').value;
             const purpose = document.getElementById('purpose').value;
+
+            // Format time display
+            const timeDisplay = timeStart && timeEnd ? `${timeStart} – ${timeEnd}` : 
+                               timeStart ? timeStart : 
+                               timeEnd ? timeEnd : 'Not specified';
 
             // Get objectives
             const objectives = Array.from(document.querySelectorAll('.objective'))
@@ -557,115 +569,110 @@
                 .map(input => input.value)
                 .filter(val => val.trim() !== '');
 
-            // Create PDF content
-            let pdfContent = `
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 40px;
-            color: #333;
-        }
-        h1 {
-            color: #667eea;
-            border-bottom: 3px solid #667eea;
-            padding-bottom: 10px;
-        }
-        h2 {
-            color: #667eea;
-            margin-top: 25px;
-            margin-bottom: 10px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 15px 0;
-        }
-        th {
-            background: #667eea;
-            color: white;
-            padding: 10px;
-            text-align: left;
-        }
-        td {
-            padding: 10px;
-            border: 1px solid #ddd;
-        }
-        ul {
-            margin: 10px 0;
-            padding-left: 25px;
-        }
-        li {
-            margin: 8px 0;
-        }
-        .info-row {
-            margin: 8px 0;
-        }
-        .label {
-            font-weight: bold;
-            color: #555;
-        }
-    </style>
-</head>
-<body>
-    <h1>Meeting Agenda</h1>
-    
-    <h2>Meeting Details</h2>
-    <div class="info-row"><span class="label">Date:</span> ${date || 'Not specified'}</div>
-    <div class="info-row"><span class="label">Time:</span> ${time || 'Not specified'}</div>
-    <div class="info-row"><span class="label">Location:</span> ${location || 'Not specified'}</div>
-    
-    <h2>Purpose</h2>
-    <p>${purpose || 'Not specified'}</p>
-    
-    <h2>Objectives</h2>
-    <ul>
-        ${objectives.length > 0 ? objectives.map(obj => `<li>${obj}</li>`).join('') : '<li>No objectives specified</li>'}
-    </ul>
-    
-    <h2>Agenda</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Time</th>
-                <th>Topic</th>
-                <th>Lead</th>
-                <th>Notes / Materials</th>
-            </tr>
-        </thead>
-        <tbody>
-            ${agendaRows.length > 0 ? agendaRows.map(item => `
-                <tr>
-                    <td>${item.time || '-'}</td>
-                    <td>${item.topic || '-'}</td>
-                    <td>${item.lead || '-'}</td>
-                    <td>${item.notes || '-'}</td>
-                </tr>
-            `).join('') : '<tr><td colspan="4">No agenda items specified</td></tr>'}
-        </tbody>
-    </table>
-    
-    <h2>Expected Outcomes</h2>
-    <ul>
-        ${outcomes.length > 0 ? outcomes.map(outcome => `<li>${outcome}</li>`).join('') : '<li>No outcomes specified</li>'}
-    </ul>
-</body>
-</html>
+            // Format date
+            const formattedDate = date ? new Date(date).toLocaleDateString('en-GB', { 
+                day: 'numeric', 
+                month: 'long', 
+                year: 'numeric' 
+            }) : 'Not specified';
+
+            // Create a temporary container for PDF content
+            const pdfContainer = document.createElement('div');
+            pdfContainer.style.position = 'absolute';
+            pdfContainer.style.left = '-9999px';
+            pdfContainer.style.width = '210mm'; // A4 width
+            pdfContainer.style.padding = '20mm';
+            pdfContainer.style.backgroundColor = '#ffffff';
+            pdfContainer.style.fontFamily = 'Arial, sans-serif';
+            pdfContainer.style.color = '#333';
+
+            pdfContainer.innerHTML = `
+                <h1 style="color: #667eea; border-bottom: 3px solid #667eea; padding-bottom: 10px; margin-bottom: 20px; font-size: 32px;">Meeting Agenda</h1>
+                
+                <h2 style="color: #667eea; margin-top: 25px; margin-bottom: 10px; font-size: 24px;">Meeting Details</h2>
+                <div style="margin: 8px 0; font-size: 14px;"><strong style="color: #555;">Date:</strong> ${formattedDate}</div>
+                <div style="margin: 8px 0; font-size: 14px;"><strong style="color: #555;">Time:</strong> ${timeDisplay}</div>
+                <div style="margin: 8px 0; font-size: 14px;"><strong style="color: #555;">Location:</strong> ${location || 'Not specified'}</div>
+                
+                <h2 style="color: #667eea; margin-top: 25px; margin-bottom: 10px; font-size: 24px;">Purpose</h2>
+                <p style="font-size: 14px; line-height: 1.6;">${purpose || 'Not specified'}</p>
+                
+                <h2 style="color: #667eea; margin-top: 25px; margin-bottom: 10px; font-size: 24px;">Objectives</h2>
+                <ul style="margin: 10px 0; padding-left: 25px; font-size: 14px;">
+                    ${objectives.length > 0 ? objectives.map(obj => `<li style="margin: 8px 0; line-height: 1.6;">${obj}</li>`).join('') : '<li>No objectives specified</li>'}
+                </ul>
+                
+                <h2 style="color: #667eea; margin-top: 25px; margin-bottom: 10px; font-size: 24px;">Agenda</h2>
+                <table style="width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 13px;">
+                    <thead>
+                        <tr>
+                            <th style="background: #667eea; color: white; padding: 10px; text-align: left; border: 1px solid #667eea;">Time</th>
+                            <th style="background: #667eea; color: white; padding: 10px; text-align: left; border: 1px solid #667eea;">Topic</th>
+                            <th style="background: #667eea; color: white; padding: 10px; text-align: left; border: 1px solid #667eea;">Lead</th>
+                            <th style="background: #667eea; color: white; padding: 10px; text-align: left; border: 1px solid #667eea;">Notes / Materials</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${agendaRows.length > 0 ? agendaRows.map(item => `
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid #ddd; line-height: 1.5;">${item.time || '-'}</td>
+                                <td style="padding: 10px; border: 1px solid #ddd; line-height: 1.5;">${item.topic || '-'}</td>
+                                <td style="padding: 10px; border: 1px solid #ddd; line-height: 1.5;">${item.lead || '-'}</td>
+                                <td style="padding: 10px; border: 1px solid #ddd; line-height: 1.5;">${item.notes || '-'}</td>
+                            </tr>
+                        `).join('') : '<tr><td colspan="4" style="padding: 10px; border: 1px solid #ddd;">No agenda items specified</td></tr>'}
+                    </tbody>
+                </table>
+                
+                <h2 style="color: #667eea; margin-top: 25px; margin-bottom: 10px; font-size: 24px;">Expected Outcomes</h2>
+                <ul style="margin: 10px 0; padding-left: 25px; font-size: 14px;">
+                    ${outcomes.length > 0 ? outcomes.map(outcome => `<li style="margin: 8px 0; line-height: 1.6;">${outcome}</li>`).join('') : '<li>No outcomes specified</li>'}
+                </ul>
             `;
 
-            // Create a new window and print
-            const printWindow = window.open('', '', 'width=800,height=600');
-            printWindow.document.write(pdfContent);
-            printWindow.document.close();
-            printWindow.focus();
-            
-            // Wait for content to load then print
-            setTimeout(() => {
-                printWindow.print();
-            }, 250);
+            document.body.appendChild(pdfContainer);
+
+            // Capture as image using html2canvas
+            const canvas = await html2canvas(pdfContainer, { 
+                scale: 2, 
+                backgroundColor: '#ffffff', 
+                useCORS: true 
+            });
+            const imgData = canvas.toDataURL('image/png');
+
+            // Remove temporary container
+            document.body.removeChild(pdfContainer);
+
+            // Create PDF
+            const pdf = new jsPDF('p', 'mm', 'a4');
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            const pdfHeight = pdf.internal.pageSize.getHeight();
+
+            // Compute image dimensions to keep aspect ratio
+            const imgProps = pdf.getImageProperties(imgData);
+            const imgWidthMm = pdfWidth;
+            const imgHeightMm = (imgProps.height * imgWidthMm) / imgProps.width;
+
+            if (imgHeightMm <= pdfHeight) {
+                pdf.addImage(imgData, 'PNG', 0, 0, imgWidthMm, imgHeightMm);
+            } else {
+                // If long, tile image across pages
+                let position = 0;
+                let remainingHeight = imgHeightMm;
+                // Draw first page
+                pdf.addImage(imgData, 'PNG', 0, position, imgWidthMm, imgHeightMm);
+                remainingHeight -= pdfHeight;
+                while (remainingHeight > 0) {
+                    position -= pdfHeight;
+                    pdf.addPage();
+                    pdf.addImage(imgData, 'PNG', 0, position, imgWidthMm, imgHeightMm);
+                    remainingHeight -= pdfHeight;
+                }
+            }
+
+            // Save PDF
+            const filename = date ? `Meeting_Agenda_${date}.pdf` : 'Meeting_Agenda.pdf';
+            pdf.save(filename);
         }
     </script>
 </body>
