@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meeting Agenda Builder</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 0.95em;
+        }
+
+        .section {
+            margin-bottom: 35px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-number {
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9em;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            color: #444;
+            font-weight: 500;
+            font-size: 0.95em;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="time"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 0.95em;
+            transition: border-color 0.3s;
+            font-family: inherit;
+        }
+
+        input[type="text"]:focus,
+        input[type="date"]:focus,
+        input[type="time"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            background: white;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        td input,
+        td textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        td textarea {
+            min-height: 40px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.95em;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-add {
+            background: #667eea;
+            color: white;
+            margin-top: 10px;
+        }
+
+        .btn-add:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-remove {
+            background: #e74c3c;
+            color: white;
+            padding: 6px 12px;
+            font-size: 0.85em;
+        }
+
+        .btn-remove:hover {
+            background: #c0392b;
+        }
+
+        .btn-export {
+            background: #27ae60;
+            color: white;
+            padding: 14px 30px;
+            font-size: 1.05em;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .btn-export:hover {
+            background: #229954;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+        }
+
+        .example-link {
+            display: inline-block;
+            margin-top: 10px;
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .example-link:hover {
+            text-decoration: underline;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: white;
+            margin: 3% auto;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 85vh;
+            overflow-y: auto;
+            animation: slideDown 0.3s;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 20px;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .modal h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .modal table {
+            font-size: 0.9em;
+        }
+
+        .modal td, .modal th {
+            padding: 8px;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+                padding: 20px;
+            }
+            
+            button {
+                display: none;
+            }
+            
+            .example-link {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📋 Meeting Agenda Builder</h1>
+        <p class="subtitle">Create a professional meeting agenda with all the essential details</p>
+        
+        <a href="#" class="example-link" onclick="showExample(event)">📄 View Example Agenda</a>
+
+        <!-- Section 1: Meeting Details -->
+        <div class="section">
+            <h2><span class="section-number">1</span> Meeting Details</h2>
+            <div class="row">
+                <div class="form-group">
+                    <label for="date">Date:</label>
+                    <input type="date" id="date">
+                </div>
+                <div class="form-group">
+                    <label for="time-start">Start Time:</label>
+                    <input type="time" id="time-start">
+                </div>
+                <div class="form-group">
+                    <label for="time-end">End Time:</label>
+                    <input type="time" id="time-end">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="location">Location / Link:</label>
+                <input type="text" id="location" placeholder="e.g., Zoom / Conference Room 2">
+            </div>
+        </div>
+
+        <!-- Section 2: Purpose -->
+        <div class="section">
+            <h2><span class="section-number">2</span> Purpose</h2>
+            <div class="form-group">
+                <label for="purpose">What is the main purpose of this meeting?</label>
+                <textarea id="purpose" placeholder="e.g., To finalise the marketing campaign launch plan and allocate responsibilities."></textarea>
+            </div>
+        </div>
+
+        <!-- Section 3: Objectives -->
+        <div class="section">
+            <h2><span class="section-number">3</span> Objectives</h2>
+            <div id="objectives-container">
+                <div class="form-group">
+                    <label>Objective 1:</label>
+                    <input type="text" class="objective" placeholder="e.g., Approve the campaign budget">
+                </div>
+            </div>
+            <button class="btn-add" onclick="addObjective()">+ Add Objective</button>
+        </div>
+
+        <!-- Section 4: Time-Stamped Agenda -->
+        <div class="section">
+            <h2><span class="section-number">4</span> Time-Stamped Agenda</h2>
+            <table id="agenda-table">
+                <thead>
+                    <tr>
+                        <th style="width: 15%;">Time</th>
+                        <th style="width: 25%;">Topic</th>
+                        <th style="width: 20%;">Lead</th>
+                        <th style="width: 30%;">Notes / Materials</th>
+                        <th style="width: 10%;">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="agenda-body">
+                    <tr>
+                        <td><input type="time" placeholder="10:00"></td>
+                        <td><input type="text" placeholder="Welcome & Purpose"></td>
+                        <td><input type="text" placeholder="Facilitator"></td>
+                        <td><textarea placeholder="Agenda shared"></textarea></td>
+                        <td><button class="btn-remove" onclick="removeRow(this)">Remove</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn-add" onclick="addAgendaRow()">+ Add Agenda Item</button>
+        </div>
+
+        <!-- Section 5: Expected Outcomes -->
+        <div class="section">
+            <h2><span class="section-number">5</span> Expected Outcomes</h2>
+            <div id="outcomes-container">
+                <div class="form-group">
+                    <label>Outcome 1:</label>
+                    <input type="text" class="outcome" placeholder="e.g., Budget approved">
+                </div>
+            </div>
+            <button class="btn-add" onclick="addOutcome()">+ Add Expected Outcome</button>
+        </div>
+
+        <button class="btn-export" onclick="exportToPDF()">📥 Export to PDF</button>
+    </div>
+
+    <!-- Modal for Example -->
+    <div id="exampleModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3>Example Meeting Agenda</h3>
+            <p><strong>Scenario:</strong> You are planning a meeting to prepare for the launch of a new marketing campaign next month.</p>
+            
+            <h4 style="margin-top: 20px; color: #333;">Meeting Details:</h4>
+            <ul style="margin-left: 20px; margin-bottom: 15px;">
+                <li>Date: 20 November 2025</li>
+                <li>Time: 10:00 – 11:30 AM</li>
+                <li>Location: Zoom / Conference Room 2</li>
+            </ul>
+
+            <h4 style="margin-top: 20px; color: #333;">Purpose:</h4>
+            <p style="margin-left: 20px; margin-bottom: 15px;">To finalise the marketing campaign launch plan and allocate responsibilities.</p>
+
+            <h4 style="margin-top: 20px; color: #333;">Objectives:</h4>
+            <ul style="margin-left: 20px; margin-bottom: 15px;">
+                <li>Approve the campaign budget</li>
+                <li>Confirm project timeline and milestones</li>
+                <li>Assign tasks to team members</li>
+                <li>Align promotional strategy across teams</li>
+            </ul>
+
+            <h4 style="margin-top: 20px; color: #333;">Agenda:</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Topic</th>
+                        <th>Lead</th>
+                        <th>Notes / Materials</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>10:00 – 10:10</td>
+                        <td>Welcome & Purpose</td>
+                        <td>Facilitator</td>
+                        <td>Agenda shared</td>
+                    </tr>
+                    <tr>
+                        <td>10:10 – 10:25</td>
+                        <td>Budget Approval</td>
+                        <td>Finance Lead</td>
+                        <td>Budget proposal document</td>
+                    </tr>
+                    <tr>
+                        <td>10:25 – 10:45</td>
+                        <td>Timeline Review</td>
+                        <td>Marketing Manager</td>
+                        <td>Project plan</td>
+                    </tr>
+                    <tr>
+                        <td>10:45 – 11:10</td>
+                        <td>Task Allocation</td>
+                        <td>Creative Lead</td>
+                        <td>Task matrix</td>
+                    </tr>
+                    <tr>
+                        <td>11:10 – 11:25</td>
+                        <td>Promotional Strategy Discussion</td>
+                        <td>Sales Lead</td>
+                        <td>Campaign strategy deck</td>
+                    </tr>
+                    <tr>
+                        <td>11:25 – 11:30</td>
+                        <td>Summary & Next Steps</td>
+                        <td>Facilitator</td>
+                        <td>Action items and responsibilities</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4 style="margin-top: 20px; color: #333;">Expected Outcomes:</h4>
+            <ul style="margin-left: 20px;">
+                <li>Budget approved</li>
+                <li>Timeline finalised</li>
+                <li>Tasks assigned to appropriate team members</li>
+                <li>Promotional strategy aligned across departments</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        let objectiveCount = 1;
+        let outcomeCount = 1;
+
+        function addObjective() {
+            objectiveCount++;
+            const container = document.getElementById('objectives-container');
+            const div = document.createElement('div');
+            div.className = 'form-group';
+            div.innerHTML = `
+                <label>Objective ${objectiveCount}:</label>
+                <input type="text" class="objective" placeholder="Enter objective">
+            `;
+            container.appendChild(div);
+        }
+
+        function addOutcome() {
+            outcomeCount++;
+            const container = document.getElementById('outcomes-container');
+            const div = document.createElement('div');
+            div.className = 'form-group';
+            div.innerHTML = `
+                <label>Outcome ${outcomeCount}:</label>
+                <input type="text" class="outcome" placeholder="Enter expected outcome">
+            `;
+            container.appendChild(div);
+        }
+
+        function addAgendaRow() {
+            const tbody = document.getElementById('agenda-body');
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td><input type="time" placeholder="10:00"></td>
+                <td><input type="text" placeholder="Topic"></td>
+                <td><input type="text" placeholder="Lead"></td>
+                <td><textarea placeholder="Notes / Materials"></textarea></td>
+                <td><button class="btn-remove" onclick="removeRow(this)">Remove</button></td>
+            `;
+            tbody.appendChild(row);
+        }
+
+        function removeRow(button) {
+            const row = button.closest('tr');
+            row.remove();
+        }
+
+        function showExample(event) {
+            event.preventDefault();
+            document.getElementById('exampleModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('exampleModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('exampleModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        function exportToPDF() {
+            // Gather all form data
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const location = document.getElementById('location').value;
+            const purpose = document.getElementById('purpose').value;
+
+            // Get objectives
+            const objectives = Array.from(document.querySelectorAll('.objective'))
+                .map(input => input.value)
+                .filter(val => val.trim() !== '');
+
+            // Get agenda items
+            const agendaRows = Array.from(document.querySelectorAll('#agenda-body tr'))
+                .map(row => {
+                    const inputs = row.querySelectorAll('input, textarea');
+                    return {
+                        time: inputs[0].value,
+                        topic: inputs[1].value,
+                        lead: inputs[2].value,
+                        notes: inputs[3].value
+                    };
+                })
+                .filter(item => item.time || item.topic);
+
+            // Get outcomes
+            const outcomes = Array.from(document.querySelectorAll('.outcome'))
+                .map(input => input.value)
+                .filter(val => val.trim() !== '');
+
+            // Create PDF content
+            let pdfContent = `
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            color: #333;
+        }
+        h1 {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #667eea;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th {
+            background: #667eea;
+            color: white;
+            padding: 10px;
+            text-align: left;
+        }
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        ul {
+            margin: 10px 0;
+            padding-left: 25px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .info-row {
+            margin: 8px 0;
+        }
+        .label {
+            font-weight: bold;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Meeting Agenda</h1>
+    
+    <h2>Meeting Details</h2>
+    <div class="info-row"><span class="label">Date:</span> ${date || 'Not specified'}</div>
+    <div class="info-row"><span class="label">Time:</span> ${time || 'Not specified'}</div>
+    <div class="info-row"><span class="label">Location:</span> ${location || 'Not specified'}</div>
+    
+    <h2>Purpose</h2>
+    <p>${purpose || 'Not specified'}</p>
+    
+    <h2>Objectives</h2>
+    <ul>
+        ${objectives.length > 0 ? objectives.map(obj => `<li>${obj}</li>`).join('') : '<li>No objectives specified</li>'}
+    </ul>
+    
+    <h2>Agenda</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th>Topic</th>
+                <th>Lead</th>
+                <th>Notes / Materials</th>
+            </tr>
+        </thead>
+        <tbody>
+            ${agendaRows.length > 0 ? agendaRows.map(item => `
+                <tr>
+                    <td>${item.time || '-'}</td>
+                    <td>${item.topic || '-'}</td>
+                    <td>${item.lead || '-'}</td>
+                    <td>${item.notes || '-'}</td>
+                </tr>
+            `).join('') : '<tr><td colspan="4">No agenda items specified</td></tr>'}
+        </tbody>
+    </table>
+    
+    <h2>Expected Outcomes</h2>
+    <ul>
+        ${outcomes.length > 0 ? outcomes.map(outcome => `<li>${outcome}</li>`).join('') : '<li>No outcomes specified</li>'}
+    </ul>
+</body>
+</html>
+            `;
+
+            // Create a new window and print
+            const printWindow = window.open('', '', 'width=800,height=600');
+            printWindow.document.write(pdfContent);
+            printWindow.document.close();
+            printWindow.focus();
+            
+            // Wait for content to load then print
+            setTimeout(() => {
+                printWindow.print();
+            }, 250);
+        }
+    </script>
+</body>
+</html>
