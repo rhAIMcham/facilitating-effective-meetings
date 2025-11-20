@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meeting Agenda Builder</title>
     <style>
+        :root {
+        --AIMblue: #4353A3;
+        --darkBlue: #38416D;
+        --teal: #5DC8B9;
+        --cream: #F1EEDE;
+        --grey: #e7e9ec;
+        --rust: #AF4510;
+        --navy: #12195C;
+        --white: #ffffff;
+        --lightBlue: #AEBAE4;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -12,7 +24,7 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: "IBM Plex Sans", sans-serif;
             padding: 20px;
             min-height: 100vh;
         }
@@ -33,7 +45,6 @@
         }
 
         .subtitle {
-            color: #666;
             margin-bottom: 30px;
             font-size: 0.95em;
         }
@@ -43,11 +54,11 @@
             padding: 25px;
             background: #f8f9fa;
             border-radius: 8px;
-            border-left: 4px solid #667eea;
+            border-left: 4px solid var(--AIMblue);
         }
 
         .section h2 {
-            color: #667eea;
+            color: var(--darkBlue);
             margin-bottom: 20px;
             font-size: 1.4em;
             display: flex;
@@ -56,7 +67,7 @@
         }
 
         .section-number {
-            background: #667eea;
+            background: var(--darkBlue);
             color: white;
             width: 30px;
             height: 30px;
@@ -97,7 +108,7 @@
         input[type="time"]:focus,
         textarea:focus {
             outline: none;
-            border-color: #667eea;
+            border-color:  var(--darkBlue);
         }
 
         textarea {
@@ -121,7 +132,7 @@
         }
 
         th {
-            background: #667eea;
+            background:  var(--darkBlue);
             color: white;
             padding: 12px;
             text-align: left;
@@ -157,19 +168,20 @@
         }
 
         .btn-add {
-            background: #667eea;
+            background:  var(--darkBlue);
             color: white;
             margin-top: 10px;
         }
 
         .btn-add:hover {
-            background: #5568d3;
+            background: var(--lightBlue);
+            color: black;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
         }
 
         .btn-remove {
-            background: #e74c3c;
+            background: var(--rust);
             color: white;
             padding: 6px 12px;
             font-size: 0.85em;
@@ -180,8 +192,8 @@
         }
 
         .btn-export {
-            background: #27ae60;
-            color: white;
+            background:var(--teal);
+            color: black;
             padding: 14px 30px;
             font-size: 1.05em;
             width: 100%;
@@ -189,7 +201,7 @@
         }
 
         .btn-export:hover {
-            background: #229954;
+            background: var(--AIMblue);
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
         }
@@ -197,7 +209,7 @@
         .example-link {
             display: inline-block;
             margin-top: 10px;
-            color: #667eea;
+            color: var(--darkBlue);
             text-decoration: none;
             font-size: 0.9em;
             font-weight: 500;
