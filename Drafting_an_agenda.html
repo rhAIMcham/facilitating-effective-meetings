@@ -611,29 +611,29 @@
             pdfContainer.style.color = '#333';
 
             pdfContainer.innerHTML = `
-                <h1 style="color: #667eea; border-bottom: 3px solid #667eea; padding-bottom: 10px; margin-bottom: 20px; font-size: 32px;">Meeting Agenda</h1>
+                <h1 style="color: #38416D; border-bottom: 3px solid #38416D; padding-bottom: 10px; margin-bottom: 20px; font-size: 32px;">Meeting Agenda</h1>
                 
-                <h2 style="color: #667eea; margin-top: 25px; margin-bottom: 10px; font-size: 24px;">Meeting Details</h2>
-                <div style="margin: 8px 0; font-size: 14px;"><strong style="color: #555;">Date:</strong> ${formattedDate}</div>
-                <div style="margin: 8px 0; font-size: 14px;"><strong style="color: #555;">Time:</strong> ${timeDisplay}</div>
-                <div style="margin: 8px 0; font-size: 14px;"><strong style="color: #555;">Location:</strong> ${location || 'Not specified'}</div>
+                <h2 style="color: #38416D; margin-top: 25px; margin-bottom: 10px; font-size: 24px;">Meeting Details</h2>
+                <div style="margin: 8px 0; font-size: 14px;"><strong style="color: #38416D;">Date:</strong> ${formattedDate}</div>
+                <div style="margin: 8px 0; font-size: 14px;"><strong style="color: #38416D;">Time:</strong> ${timeDisplay}</div>
+                <div style="margin: 8px 0; font-size: 14px;"><strong style="color: #38416D;">Location:</strong> ${location || 'Not specified'}</div>
                 
-                <h2 style="color: #667eea; margin-top: 25px; margin-bottom: 10px; font-size: 24px;">Purpose</h2>
+                <h2 style="color: #38416D; margin-top: 25px; margin-bottom: 10px; font-size: 24px;">Purpose</h2>
                 <p style="font-size: 14px; line-height: 1.6;">${purpose || 'Not specified'}</p>
                 
-                <h2 style="color: #667eea; margin-top: 25px; margin-bottom: 10px; font-size: 24px;">Objectives</h2>
+                <h2 style="color: #38416D; margin-top: 25px; margin-bottom: 10px; font-size: 24px;">Objectives</h2>
                 <ul style="margin: 10px 0; padding-left: 25px; font-size: 14px;">
                     ${objectives.length > 0 ? objectives.map(obj => `<li style="margin: 8px 0; line-height: 1.6;">${obj}</li>`).join('') : '<li>No objectives specified</li>'}
                 </ul>
                 
-                <h2 style="color: #667eea; margin-top: 25px; margin-bottom: 10px; font-size: 24px;">Agenda</h2>
+                <h2 style="color: #38416D; margin-top: 25px; margin-bottom: 10px; font-size: 24px;">Agenda</h2>
                 <table style="width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 13px;">
                     <thead>
                         <tr>
-                            <th style="background: #667eea; color: white; padding: 10px; text-align: left; border: 1px solid #667eea;">Time</th>
-                            <th style="background: #667eea; color: white; padding: 10px; text-align: left; border: 1px solid #667eea;">Topic</th>
-                            <th style="background: #667eea; color: white; padding: 10px; text-align: left; border: 1px solid #667eea;">Lead</th>
-                            <th style="background: #667eea; color: white; padding: 10px; text-align: left; border: 1px solid #667eea;">Notes / Materials</th>
+                            <th style="background: #38416D; color: white; padding: 10px; text-align: left; border: 1px solid #38416D;">Time</th>
+                            <th style="background: #38416D; color: white; padding: 10px; text-align: left; border: 1px solid #38416D;">Topic</th>
+                            <th style="background: #38416D; color: white; padding: 10px; text-align: left; border: 1px solid #38416D;">Lead</th>
+                            <th style="background: #38416D; color: white; padding: 10px; text-align: left; border: 1px solid #38416D;">Notes / Materials</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -648,7 +648,7 @@
                     </tbody>
                 </table>
                 
-                <h2 style="color: #667eea; margin-top: 25px; margin-bottom: 10px; font-size: 24px;">Expected Outcomes</h2>
+                <h2 style="color: #38416D; margin-top: 25px; margin-bottom: 10px; font-size: 24px;">Expected Outcomes</h2>
                 <ul style="margin: 10px 0; padding-left: 25px; font-size: 14px;">
                     ${outcomes.length > 0 ? outcomes.map(outcome => `<li style="margin: 8px 0; line-height: 1.6;">${outcome}</li>`).join('') : '<li>No outcomes specified</li>'}
                 </ul>
