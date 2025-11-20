@@ -62,11 +62,11 @@
       height: fit-content;
     }
     .dragItems {
-            width: 350px;
     background: rgb(206, 206, 206);
     padding: 20px;
     border-radius: 8px;
     height: fit-content;
+    margin-bottom: 20px;
     }
 
     .column-header {
@@ -80,6 +80,11 @@
     .cards-container {
       min-height: 100px;
       padding: 4px;
+
+    }
+    #cardHome {
+        display: flex;
+        gap: 20px;
     }
 
     .card {
@@ -90,6 +95,7 @@
       cursor: move;
       box-shadow: 0 1px 3px rgba(0,0,0,0.12);
       transition: transform 0.2s, box-shadow 0.2s;
+      max-width: 350px;
     }
 
     .card:hover {
@@ -237,11 +243,10 @@
 </head>
 <body>
   <div class="container">
-    <div class="actionArea">
-          <div>
+              <div>
       <div class="dragItems">
         <div class="column-header">Draggable Items</div>
-        <div class="cards-container" data-column="dragItems">
+        <div class="cards-container" data-column="dragItems" id="cardHome">
         <div class="card"  id="obj1" draggable="true">
                 <p>Review progress on the new software implementation and identify issues affecting rollout.</p>
             </div>
@@ -265,6 +270,8 @@
         </div>
       </div>
 </div>
+    <div class="actionArea">
+
     <div class="board">
 
       <div class="column">
