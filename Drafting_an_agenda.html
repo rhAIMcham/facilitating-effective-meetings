@@ -38,6 +38,14 @@
             padding: 40px;
         }
 
+        .titleArea {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .titleArea > button {
+            height: 75px;
+        }
         h1 {
             color: #333;
             margin-bottom: 10px;
@@ -158,6 +166,7 @@
         }
 
         button {
+            font-family: "IBM Plex Sans", sans-serif;
             padding: 10px 20px;
             border: none;
             border-radius: 6px;
@@ -192,8 +201,8 @@
         }
 
         .btn-export {
-            background:var(--teal);
-            color: black;
+            background:var(--AIMblue);
+            color: white;
             padding: 14px 30px;
             font-size: 1.05em;
             width: 100%;
@@ -201,9 +210,10 @@
         }
 
         .btn-export:hover {
-            background: var(--AIMblue);
+            background: var(--teal);
+            color: black;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+            box-shadow: 0 6px 20px var(--teal);
         }
 
         .example-link {
@@ -267,7 +277,7 @@
         }
 
         .modal h3 {
-            color: #667eea;
+          color: #333;
             margin-bottom: 20px;
         }
 
@@ -302,10 +312,12 @@
 </head>
 <body>
     <div class="container">
-        <h1>📋 Meeting Agenda Builder</h1>
-        <p class="subtitle">Create a professional meeting agenda with all the essential details</p>
+        <div class="titleArea">
+            <div>
+        <h1>Meeting Agenda Builder</h1>
+        <p class="subtitle">Create a professional meeting agenda with all the essential details</p></div>
         
-        <a href="#" class="example-link" onclick="showExample(event)">📄 View Example Agenda</a>
+        <button onclick="showExample(event)">View Example Agenda</button></div>
 
         <!-- Section 1: Meeting Details -->
         <div class="section">
@@ -389,7 +401,7 @@
             <button class="btn-add" onclick="addOutcome()">+ Add Expected Outcome</button>
         </div>
 
-        <button class="btn-export" onclick="exportToPDF()">📥 Export to PDF</button>
+        <button class="btn-export" onclick="exportToPDF()">Export to PDF</button>
     </div>
 
     <!-- Modal for Example -->
