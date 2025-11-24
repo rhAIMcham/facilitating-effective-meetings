@@ -51,6 +51,7 @@
       overflow-x: auto;
       padding-bottom: 20px;
       justify-content: space-around;
+      flex-wrap: wrap;
     }
 
     .column {
@@ -257,8 +258,6 @@
             <div class="card"  id="p2" draggable="true">
                 <p>To decide on the theme, budget and timeline for the annual staff event.</p>
             </div>
-          
-        
             <div class="card" id="out1" draggable="true">
                 <p>A shared understanding of current challenges and an action plan for resolution.</p>
             </div>
@@ -272,22 +271,24 @@
       </div>
 </div>
     <div class="actionArea">
-
     <div class="board">
-
       <div class="column">
-        <div class="column-header">Purpose</div>
-        <div class="cards-container" data-column="purposeGroup"></div>
+     
+        <div class="cards-container" data-column="purposeGroup">
+             <div class="column-header">Purpose</div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="cards-container" data-column="objGroup">
+                  <div class="column-header">Objective</div>
+        </div>
       </div>
 
       <div class="column">
-        <div class="column-header">Objective</div>
-        <div class="cards-container" data-column="objGroup"></div>
-      </div>
 
-      <div class="column">
-        <div class="column-header">Outcome</div>
-        <div class="cards-container" data-column="outGroup"></div>
+        <div class="cards-container" data-column="outGroup">
+                  <div class="column-header">Outcome</div>
+        </div>
       </div>
     </div>
     </div>
