@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Key elements of a meeting</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+<style>
+.txta {
+    width: 100%;
+    min-height: 100px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    overflow: hidden;
+    line-height: 1.4;
+}
+
+:root {
+    --AIMblue: #4353A3;
+    --darkBlue: #38416D;
+    --teal: #5DC8B9;
+    --cream: #F1EEDE;
+    --grey: #e7e9ec;
+    --rust: #AF4510;
+    --navy: #12195C;
+    --white: #ffffff;
+    --lightBlue: #AEBAE4;
+}
+
+input {
+    border: none;
+    width: fit-content;
+
+}
+
+body {
+    font-family: "IBM Plex Sans", sans-serif;
+}
+
+table {
+    width: 100%;
+    margin:0;
+    padding:0;
+    border-collapse: collapse;
+    border-spacing: 0;
+    text-align: left;
+}
+
+table tr {
+    border: 1px solid var(--AIMblue);
+    padding: 5px;
+}
+
+table th, table td {
+    border: 1px solid var(--AIMblue);
+    padding: 10px;
+}
+
+table th {
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    background-color: var(--darkBlue);
+    color: var(--white);
+}
+
+tr:nth-child(even) {
+    background-color: var(--grey); /*Grey of torment!*/
+} 
+
+tr:nth-child(odd) {
+    background-color: white; 
+} 
+
+.high {
+background-color: orange;
+}
+/* 
+ @media screen and (max-width: 700px) {
+
+table {
+    border: 0;
+    border: none;
+}
+
+table thead {
+    display: none;
+}
+
+table tr {
+    margin-bottom: 10px;
+    display: block;
+    border-bottom: 2px solid var(--AIMblue);
+    border-left: 1px solid var(--lightBlue);
+    border-right: 1px solid var(--lightBlue);
+    border-top: 1px solid var(--lightBlue);
+}
+
+table td {
+    display: block;
+    text-align: right;
+    font-size: 13px;
+    border-bottom: 1px dotted var(--rust);
+    border-left: 0px dotted #ccc;
+    border-right: 0px dotted #ccc;
+    border-top: 0px dotted #ccc;
+}
+
+table td:last-child {
+    border-bottom: 0;
+}
+
+table td:before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+}
+} */
+
+</style>
+  </head>
+<body>
+<table>
+ <colgroup>
+        <col style="width: 50%;">
+        <col style="width: 50%;">
+      </colgroup>
+  <thead>
+    <th>Purpose</th>
+    <th>Desired outcome</th>
+  </thead>
+  <tbody>
+    <tr>
+        <td data-label="Purpose">
+          To review project progress and identify obstacles.
+        </td>
+        <td data-label="Desired outcome">
+        List of challenges with assigned owners and action deadlines.
+        </td>
+    </tr>
+    <tr>
+        <td data-label="Purpose">
+         To evaluate potential suppliers for a new product.
+        </td>
+        <td data-label="Desired outcome">
+         Decision on selected supplier and next steps for onboarding.
+        </td>
+    </tr>
+    <tr>
+        <td data-label="Purpose">
+        To brainstorm ideas for the upcoming marketing campaign.
+        </td>
+        <td data-label="Desired outcome">
+          Shortlisted set of five campaign ideas for further development.
+        </td>
+    </tr>
+    <tr>
+        <td data-label="Purpose">
+         To discuss customer feedback trends.
+        </td>
+        <td data-label="Desired outcome">
+          Agreed improvement actions and communication plan.
+        </td>
+    </tr>
+        <td data-label="Purpose">
+        To align departments on quarterly goals.
+        </td>
+        <td data-label="Desired outcome">
+          Confirmed and documented list of priorities with agreed KPIs.
+        </td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>
