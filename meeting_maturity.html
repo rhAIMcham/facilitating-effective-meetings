@@ -327,25 +327,45 @@ td > h4 {
                 
                 for (const [area, value] of Object.entries(ratings)) {
                     const div = document.createElement('div');
-                    // div.className = 'result-item';
-                    // div.innerHTML = `
-                    //     <span class="result-label">${focusAreas[index]}</span>
-                    //     <span class="result-value">${value}</span>
-                    // `;
+                    div.className = 'result-item';
+                    div.innerHTML = `
+                        <span class="result-label">${focusAreas[index]}</span>
+                        <span class="result-value">${value}</span>
+                    `;
                     resultsList.appendChild(div);
                     total += value;
                     index++;
                 }
 
-                if (ratingCount === 5) {
-                    const average = (total / ratingCount).toFixed(2);
+                 if (ratingCount === 5 && total === 1 ) {
                     document.getElementById('average').innerHTML = `
-                        <div>Overall Average Score</div>
-                        <div style="font-size: 36px; margin-top: 10px; font-weight: 700;">${average}</div>
+                        <div style="font-size: 26px; margin: 15px 0; font-weight: 500;">Overall Score: ${total}</div>
+                        <div><p style="padding: 10px 0;">Your meeting maturity is very low.</p></div>
+                    `;
+                } else if (ratingCount === 5 && total === 2 ) {
+                    document.getElementById('average').innerHTML = `
+                        <div style="font-size: 26px; margin: 15px 0; font-weight: 500;">Overall Score: ${total}</div>
+                        <div><p style="padding: 10px 0;">Your meeting maturity is low.</p></div>
+
+                    `;
+                }  else if  (ratingCount === 5 && total === 3 ) {
+                    document.getElementById('average').innerHTML = `
+                        <div style="font-size: 26px; margin: 15px 0; font-weight: 500;">Overall Score: ${total}</div>
+                        <div><p style="padding: 10px 0;">Your meeting maturity is average.</p></div>
+                    `;
+                }   else if  (ratingCount === 5 && total === 4 ) {
+                    document.getElementById('average').innerHTML = `
+                        <div style="font-size: 26px; margin: 15px 0; font-weight: 500;">Overall Score: ${total}</div>
+                        <div><p style="padding: 10px 0;">Your meeting maturity is higher than average.</p></div>
+                    `;
+                }  else if  (ratingCount === 5 && total === 5 ) {
+                    document.getElementById('average').innerHTML = `
+                        <div style="font-size: 26px; margin: 15px 0; font-weight: 500;">Overall Score: ${total}</div>
+                        <div><p style="padding: 10px 0;">Your meeting maturity is excellent.</p></div>
                     `;
                 } else {
                     document.getElementById('average').innerHTML = `
-                        <div style="font-size: 16px;">Complete all ratings to see your average score</div>
+                        <div style="font-size: 16px;">Complete all ratings to see your total score</div>
                         <div style="margin-top: 8px; font-size: 14px; opacity: 0.9;">${ratingCount} of 5 completed</div>
                     `;
                 }
