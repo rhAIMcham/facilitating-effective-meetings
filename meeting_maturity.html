@@ -37,7 +37,7 @@ body {
     background: white;
     border-radius: 12px;
     padding: 30px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    /* box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); */
 }
 
 h1 {
@@ -284,7 +284,6 @@ td > h4 {
         </table>
 
         <div class="results" id="results">
-            <h2>Your Ratings:</h2>
             <div id="resultsList"></div>
             <div class="average" id="average"></div>
         </div>
@@ -328,11 +327,11 @@ td > h4 {
                 
                 for (const [area, value] of Object.entries(ratings)) {
                     const div = document.createElement('div');
-                    div.className = 'result-item';
-                    div.innerHTML = `
-                        <span class="result-label">${focusAreas[index]}</span>
-                        <span class="result-value">${value}</span>
-                    `;
+                    // div.className = 'result-item';
+                    // div.innerHTML = `
+                    //     <span class="result-label">${focusAreas[index]}</span>
+                    //     <span class="result-value">${value}</span>
+                    // `;
                     resultsList.appendChild(div);
                     total += value;
                     index++;
