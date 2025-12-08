@@ -1,378 +1,640 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Meeting performance maturity model quiz</title>
+  <title>Meeting Performance Maturity Assessment</title>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
-<style>
- :root{
-    --AIMblue: #4353A3;
-    --darkBlue: #38416D;
-    --teal: #5DC8B9;
-    --cream: #F1EEDE;
-    --grey: #ebebeb;
-    --rust: #AF4510;
-    --navy: #12195C;
-    --white: #ffffff;
-    --lightBlue: #AEBAE4;
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --AIMblue: #4353A3;
+      --darkBlue: #38416D;
+      --teal: #5DC8B9;
+      --cream: #F1EEDE;
+      --grey: #ebebeb;
+      --rust: #AF4510;
+      --navy: #12195C;
+      --white: #ffffff;
+      --lightBlue: #AEBAE4;
     }
     
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-body {
-   font-family: "IBM-Plex-Sans", sans-serif;
-    padding: 20px;
-    min-height: 100vh;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    background: white;
-    border-radius: 12px;
-    padding: 30px;
-    /* box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); */
-}
-
-h1 {
-    color: var(--darkBlue);
-    margin-bottom: 10px;
-    font-size: 28px;
-}
-
-.legend {
-    margin-bottom: 30px;
-    padding: 15px;
-    background: #f7fafc;
-    border-radius: 8px;
-    font-size: 13px;
-    color: #4a5568;
-    line-height: 1.6;
-}
-
-.legend-title {
-    font-weight: 600;
-    margin-bottom: 8px;
-    color: var(--darkBlue);
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-}
-
-th, td {
-    padding: 16px;
-    text-align: left;
-    border-bottom: 1px solid #e2e8f0;
-}
-
-th {
-    background: var(--darkBlue);
-    color: white;
-    font-weight: 600;
-    font-size: 14px;
-}
-
-th:first-child {
-    border-radius: 8px 0 0 0;
-}
-
-th:last-child {
-    border-radius: 0 8px 0 0;
-}
-
-td:first-child {
-    font-weight: 500;
-    color: #2d3748;
-    max-width: 300px;
-}
-
-.rating-cell {
-    text-align: center;
-}
-
-.rating-btn {
-    width: 40px;
+    body {
       font-family: "IBM Plex Sans", sans-serif;
-    height: 40px;
-    border: 2px solid var(--lightBlue);
-    background: white;
-    border-radius: 50%;
-    cursor: pointer;
-    font-weight: 600;
-    color:  var(--AIMblue);
-    transition: all 0.2s ease;
-    font-size: 14px;
-}
-
-.rating-btn:hover {
-    border-color: var(--AIMblue);
-    transform: scale(1.1);
-    background: #edf2f7;
-}
-
-.rating-btn.selected {
-  background-color: #12195C;
-    border-color: #12195C;
-    color: white;
-    transform: scale(1.15);
-}
-
-
-button {
-
-
-  position: relative;
-  color: white;
-  width: 200px;
-  border: solid 2px var(--cream);
-  border-radius: 8px;
-  margin-top: 10px;
-  cursor: pointer;
-  padding: 10px;
-  font-size: 1rem;
-}
-
-button:hover {
-  background-color: var(--lightBlue);
-  color: #12195C;
-  border: solid 2px #12195C;
-}
-.results {
-    margin-top: 30px;
-    padding: 20px;
-    background: #f7fafc;
-    border-radius: 8px;
-    display: none;
-}
-
-.results.show {
-    display: block;
-}
-
-.results h2 {
-    color: #2d3748;
-    margin-bottom: 15px;
-    font-size: 20px;
-}
-
-.result-item {
-    margin-bottom: 12px;
-    padding: 12px;
-    background: white;
-    border-radius: 6px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.result-label {
-    font-weight: 500;
-    color: #4a5568;
-}
-
-.result-value {
-    font-weight: 700;
-    color: #667eea;
-    font-size: 18px;
-}
-
-.average {
-    font-size: 24px;
-    padding: 20px;
-    text-align: center;
-    border-radius: 8px;
-    margin-top: 15px;
-}
-td > h4 {
-  margin-bottom: 10px;
-}
-@media (max-width: 768px) {
-    .container {
-        padding: 20px;
+      min-height: 100vh;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    th, td {
-        padding: 12px 8px;
-        font-size: 13px;
+    .quiz-container {
+      max-width: 900px;
+      width: 100%;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
     }
 
-    .rating-btn {
-        width: 35px;
-        height: 35px;
-        font-size: 13px;
+    .progress-bar {
+      height: 6px;
+      background: var(--grey);
+      position: relative;
     }
 
-    h1 {
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--AIMblue), var(--teal));
+      transition: width 0.4s ease;
+      width: 0%;
+    }
+
+    .quiz-content {
+      padding: 40px;
+    }
+
+    .slide {
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .question-number {
+      color: var(--AIMblue);
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    h2 {
+      color: var(--navy);
+      font-size: 28px;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    .description {
+      color: #4a5568;
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .options-grid {
+      display: grid;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .option-card {
+      border: 2px solid var(--grey);
+      border-radius: 12px;
+      padding: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: white;
+      position: relative;
+    }
+
+    .option-card:hover {
+      border-color: var(--lightBlue);
+      background: #f7fafc;
+      transform: translateX(4px);
+    }
+
+    .option-card.selected {
+      border-color: var(--navy);
+      background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+      box-shadow: 0 4px 12px rgba(18, 25, 92, 0.15);
+    }
+
+    .option-card.selected::before {
+      content: '✓';
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 28px;
+      height: 28px;
+      background: var(--navy);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .option-level {
+      font-weight: 700;
+      color: var(--navy);
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+
+    .option-text {
+      color: #4a5568;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .navigation {
+      display: flex;
+      gap: 15px;
+      justify-content: space-between;
+      margin-top: 30px;
+    }
+
+    .btn {
+      padding: 14px 32px;
+      border: none;
+      border-radius: 8px;
+      font-family: "IBM Plex Sans", sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-secondary {
+      background: var(--grey);
+      color: var(--darkBlue);
+    }
+
+    .btn-secondary:hover {
+      background: #d1d5db;
+    }
+
+    .btn-primary {
+      background: var(--navy);
+      color: white;
+      flex: 1;
+    }
+
+    .btn-primary:hover {
+      background: var(--AIMblue);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(18, 25, 92, 0.4);
+    }
+
+    .btn-primary:disabled {
+      background: var(--grey);
+      color: #9ca3af;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .results-container {
+      text-align: center;
+    }
+
+    .results-score {
+      font-size: 64px;
+      font-weight: 700;
+      color: var(--navy);
+      margin: 30px 0 20px;
+    }
+
+    .results-label {
+      font-size: 24px;
+      color: var(--darkBlue);
+      margin-bottom: 30px;
+      font-weight: 500;
+    }
+
+    .results-breakdown {
+      background: #f7fafc;
+      border-radius: 12px;
+      padding: 25px;
+      margin-top: 30px;
+      text-align: left;
+    }
+
+    .results-breakdown h3 {
+      color: var(--navy);
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
+
+    .result-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .result-item:last-child {
+      border-bottom: none;
+    }
+
+    .result-area {
+      font-weight: 500;
+      color: #4a5568;
+    }
+
+    .result-score {
+      font-weight: 700;
+      color: var(--AIMblue);
+      font-size: 18px;
+    }
+
+    .btn-restart {
+      margin-top: 30px;
+      background: var(--navy);
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .quiz-content {
+        padding: 25px;
+      }
+
+      h2 {
         font-size: 22px;
+      }
+
+      .option-card {
+        padding: 16px;
+      }
+
+      .results-score {
+        font-size: 48px;
+      }
     }
-}
-    </style>
+  </style>
 </head>
 <body>
-    <div class="container">       
-        <div class="legend">
-            <div class="legend-title">Rating Scale:</div>
-            <strong>1</strong> = Individual (Ad-hoc, inconsistent) | 
-            <strong>2</strong> = Professional (Basic standards) | 
-            <strong>3</strong> = Effective (Structured, tailored) | 
-            <strong>4</strong> = Systematised (Integrated, monitored) | 
-            <strong>5</strong> = Optimised/World Class (Continuous improvement)
-        </div>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Focus Area</th>
-                    <th class="rating-cell">1</th>
-                    <th class="rating-cell">2</th>
-                    <th class="rating-cell">3</th>
-                    <th class="rating-cell">4</th>
-                    <th class="rating-cell">5</th>
-                </tr>
-            </thead>
-            <tbody id="assessmentBody">
-                <tr data-area="meeting-design">
-                    <td><h4>Meeting design</h4>Agendas and meeting structures are consistent and appropriate for the meeting type.</td>
-                    <td class="rating-cell"><button class="rating-btn" data-value="1">1</button></td>
-                    <td class="rating-cell"><button class="rating-btn" data-value="2">2</button></td>
-                    <td class="rating-cell"><button class="rating-btn" data-value="3">3</button></td>
-                    <td class="rating-cell"><button class="rating-btn" data-value="4">4</button></td>
-                    <td class="rating-cell"><button class="rating-btn" data-value="5">5</button></td>
-                </tr>
-                <tr data-area="meeting-skills">
-                    <td><h4>Meeting skills</h4>Meeting leaders and participants are trained in facilitation, participation and outcome documentation.</td>
-                    <td class="rating-cell"><button class="rating-btn" data-value="1">1</button></td>
-                    <td class="rating-cell"><button class="rating-btn" data-value="2">2</button></td>
-                    <td class="rating-cell"><button class="rating-btn" data-value="3">3</button></td>
-                    <td class="rating-cell"><button class="rating-btn" data-value="4">4</button></td>
-                    <td class="rating-cell"><button class="rating-btn" data-value="5">5</button></td>
-                </tr>
-                <tr data-area="stakeholder-satisfaction">
-                    <td><h4>Stakeholder satisfaction</h4>Feedback from participants is collected and used to improve meetings.</td>
-                    <td class="rating-cell"><button class="rating-btn" data-value="1">1</button></td>
-                    <td class="rating-cell"><button class="rating-btn" data-value="2">2</button></td>
-                    <td class="rating-cell"><button class="rating-btn" data-value="3">3</button></td>
-                    <td class="rating-cell"><button class="rating-btn" data-value="4">4</button></td>
-                    <td class="rating-cell"><button class="rating-btn" data-value="5">5</button></td>
-                </tr>
-                <tr data-area="facilities-technology">
-                    <td><h4>Facilities, technology and resources</h4>Technology and resources are consistently available and support effective meetings.</td>
-                    <td class="rating-cell"><button class="rating-btn" data-value="1">1</button></td>
-                    <td class="rating-cell"><button class="rating-btn" data-value="2">2</button></td>
-                    <td class="rating-cell"><button class="rating-btn" data-value="3">3</button></td>
-                    <td class="rating-cell"><button class="rating-btn" data-value="4">4</button></td>
-                    <td class="rating-cell"><button class="rating-btn" data-value="5">5</button></td>
-                </tr>
-                <tr data-area="cultural-ownership">
-                    <td><h4>Cultural ownership</h4>Meeting behaviours reflect organisational values and employees are empowered to uphold standards.</td>
-                    <td class="rating-cell"><button class="rating-btn" data-value="1">1</button></td>
-                    <td class="rating-cell"><button class="rating-btn" data-value="2">2</button></td>
-                    <td class="rating-cell"><button class="rating-btn" data-value="3">3</button></td>
-                    <td class="rating-cell"><button class="rating-btn" data-value="4">4</button></td>
-                    <td class="rating-cell"><button class="rating-btn" data-value="5">5</button></td>
-                </tr>
-            </tbody>
-        </table>
-
-        <div class="results" id="results">
-            <div id="resultsList"></div>
-            <div class="average" id="average"></div>
-        </div>
+  <div class="quiz-container">
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressBar"></div>
     </div>
+    
+    <div class="quiz-content">
+      <!-- Slide 1: Meeting Design -->
+      <div class="slide active" data-area="meeting-design">
+        <div class="question-number">Question 1 of 5</div>
+        <h2>Meeting Design</h2>
+        <p class="description">This area evaluates how effectively an organisation understands and standardises its approach to different types of meetings.</p>
+        
+        <div class="options-grid">
+          <div class="option-card" data-value="1">
+            <div class="option-level">Level 1: Individual</div>
+            <div class="option-text">Minimal distinction between meeting types. No standardised approach or guidelines. Meetings are inconsistent in structure, purpose and outcomes.</div>
+          </div>
+          
+          <div class="option-card" data-value="2">
+            <div class="option-level">Level 2: Professional</div>
+            <div class="option-text">Expected meeting practices are documented.</div>
+          </div>
+          
+          <div class="option-card" data-value="3">
+            <div class="option-level">Level 3: Effective</div>
+            <div class="option-text">Business units use predictable meeting structures and cadences designed to deliver pre-determined business outcomes. Distinct meeting roles are identified and documented. Meeting designs clarify the process for making decisions within that business unit.</div>
+          </div>
+          
+          <div class="option-card" data-value="4">
+            <div class="option-level">Level 4: Systematised</div>
+            <div class="option-text">Business process definition includes identification and integration of meeting practices across business units. Standard organisation-wide meeting structures are documented for each distinct type of meeting. Standardised decision-making methods are developed and shared across the organisation.</div>
+          </div>
+          
+          <div class="option-card" data-value="5">
+            <div class="option-level">Level 5: Optimised / World Class</div>
+            <div class="option-text">Meeting designs intentionally reflect organisational values and strategic priorities. Existing meeting designs evolve based on experimentation and regular critique. Proactive initiatives are taken to design new meeting structures based upon gaps identified through self-assessments.</div>
+          </div>
+        </div>
+        
+        <div class="navigation">
+          <button class="btn btn-primary" id="nextBtn1" disabled>Next</button>
+        </div>
+      </div>
 
-    <script>
-        const ratings = {};
-        const focusAreas = [
-            'Meeting Design',
-            'Meeting Skills',
-            'Stakeholder Satisfaction',
-            'Facilities, Technology and Resources',
-            'Cultural Ownership'
-        ];
+      <!-- Slide 2: Meeting Skills -->
+      <div class="slide" data-area="meeting-skills">
+        <div class="question-number">Question 2 of 5</div>
+        <h2>Meeting Skills</h2>
+        <p class="description">This focus area assesses the capabilities of participants to schedule, convene, facilitate, design and actively engage in meetings.</p>
+        
+        <div class="options-grid">
+          <div class="option-card" data-value="1">
+            <div class="option-level">Level 1: Individual</div>
+            <div class="option-text">Organisation takes no special effort to recruit or cultivate meeting skills. Facilitation is inconsistent and participation varies.</div>
+          </div>
+          
+          <div class="option-card" data-value="2">
+            <div class="option-level">Level 2: Professional</div>
+            <div class="option-text">Meeting leaders are expected to follow documented practices. Meeting records provide evidence that the expected meeting practices were followed.</div>
+          </div>
+          
+          <div class="option-card" data-value="3">
+            <div class="option-level">Level 3: Effective</div>
+            <div class="option-text">Training programs for meeting leaders in best practice methodology and basic facilitation are in place. Training and/or mentoring on meeting participation is in place. Job descriptions and interviews formally address meeting conduct.</div>
+          </div>
+          
+          <div class="option-card" data-value="4">
+            <div class="option-level">Level 4: Systematised</div>
+            <div class="option-text">Training programs for meeting facilitation and design are in place. Meeting leaders and participants receive ongoing training and have access to mentorship and coaching programs. Meeting performance expectations are documented and discussed as part of job performance review.</div>
+          </div>
+          
+          <div class="option-card" data-value="5">
+            <div class="option-level">Level 5: Optimised / World Class</div>
+            <div class="option-text">Meeting facilitation and design is a recognised job function and core competency within the organisation. Effective meeting participation enables distributed decision making throughout the organisation.</div>
+          </div>
+        </div>
+        
+        <div class="navigation">
+          <button class="btn btn-secondary" id="backBtn2">Back</button>
+          <button class="btn btn-primary" id="nextBtn2" disabled>Next</button>
+        </div>
+      </div>
 
-        document.querySelectorAll('.rating-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const row = this.closest('tr');
-                const area = row.dataset.area;
-                const value = parseInt(this.dataset.value);
+      <!-- Slide 3: Stakeholder Satisfaction -->
+      <div class="slide" data-area="stakeholder-satisfaction">
+        <div class="question-number">Question 3 of 5</div>
+        <h2>Stakeholder Satisfaction</h2>
+        <p class="description">This component measures whether meetings are perceived as valuable, productive and relevant by all participants and stakeholders.</p>
+        
+        <div class="options-grid">
+          <div class="option-card" data-value="1">
+            <div class="option-level">Level 1: Individual</div>
+            <div class="option-text">Feedback on meeting effectiveness is rarely collected. Participant satisfaction is unknown or ignored.</div>
+          </div>
+          
+          <div class="option-card" data-value="2">
+            <div class="option-level">Level 2: Professional</div>
+            <div class="option-text">Meeting participants are empowered to require meetings adhere to documented practices.</div>
+          </div>
+          
+          <div class="option-card" data-value="3">
+            <div class="option-level">Level 3: Effective</div>
+            <div class="option-text">Key stakeholders are identified, including both meeting participants and those impacted by meeting outcomes. Metrics are established and collected for both qualitative and quantitative meeting satisfaction and performance indicators. Proactive initiatives are in place to minimise or eliminate ineffective meetings.</div>
+          </div>
+          
+          <div class="option-card" data-value="4">
+            <div class="option-level">Level 4: Systematised</div>
+            <div class="option-text">Stakeholder feedback is consistently collected across the organisation. Inappropriate meeting structures or behaviours impacting stakeholder expectations receive corrective attention from management. Meeting performance metrics are available for audit and regularly reviewed.</div>
+          </div>
+          
+          <div class="option-card" data-value="5">
+            <div class="option-level">Level 5: Optimised / World Class</div>
+            <div class="option-text">Stakeholder feedback validates that the meeting structures used meet or exceed stakeholder expectations. External stakeholders and observers have qualitatively consistent meeting experiences when meeting with different groups within the organisation.</div>
+          </div>
+        </div>
+        
+        <div class="navigation">
+          <button class="btn btn-secondary" id="backBtn3">Back</button>
+          <button class="btn btn-primary" id="nextBtn3" disabled>Next</button>
+        </div>
+      </div>
 
-                row.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('selected'));
-                this.classList.add('selected');
+      <!-- Slide 4: Facilities, Technology and Resources -->
+      <div class="slide" data-area="facilities-technology">
+        <div class="question-number">Question 4 of 5</div>
+        <h2>Facilities, Technology and Resources</h2>
+        <p class="description">This area evaluates the infrastructure that supports effective meetings, including tools, technology and physical spaces.</p>
+        
+        <div class="options-grid">
+          <div class="option-card" data-value="1">
+            <div class="option-level">Level 1: Individual</div>
+            <div class="option-text">Basic scheduling support only; facilities and technology are ad-hoc. Little consideration for optimising the participant experience.</div>
+          </div>
+          
+          <div class="option-card" data-value="2">
+            <div class="option-level">Level 2: Professional</div>
+            <div class="option-text">Support for scheduling, holding, and recording meeting outcomes is in place.</div>
+          </div>
+          
+          <div class="option-card" data-value="3">
+            <div class="option-level">Level 3: Effective</div>
+            <div class="option-text">Centralised meeting records are available for the standard meetings conducted by each unit. Meeting facilities and technology support the designed meeting processes.</div>
+          </div>
+          
+          <div class="option-card" data-value="4">
+            <div class="option-level">Level 4: Systematised</div>
+            <div class="option-text">Systems are in place to automate high frequency meeting tasks. Meeting content is centrally available and can be easily reviewed. The organisation maintains a well-stocked meeting toolkit, including appropriate facilities, technology and supplies for in-person meetings and remote meetings.</div>
+          </div>
+          
+          <div class="option-card" data-value="5">
+            <div class="option-level">Level 5: Optimised / World Class</div>
+            <div class="option-text">Meeting facilities and technology are consistently updated to support a wide range of meeting practices. Individuals throughout the organization receive support for participation in professional development activities outside the organisation.</div>
+          </div>
+        </div>
+        
+        <div class="navigation">
+          <button class="btn btn-secondary" id="backBtn4">Back</button>
+          <button class="btn btn-primary" id="nextBtn4" disabled>Next</button>
+        </div>
+      </div>
 
-                ratings[area] = value;
-                updateResults();
-            });
-        });
+      <!-- Slide 5: Cultural Ownership -->
+      <div class="slide" data-area="cultural-ownership">
+        <div class="question-number">Question 5 of 5</div>
+        <h2>Cultural Ownership</h2>
+        <p class="description">Cultural ownership reflects the organisation's commitment to consistent, values-driven meeting practices.</p>
+        
+        <div class="options-grid">
+          <div class="option-card" data-value="1">
+            <div class="option-level">Level 1: Individual</div>
+            <div class="option-text">Meeting practices vary widely between managers or teams. Norms are informal and inconsistent, with limited accountability.</div>
+          </div>
+          
+          <div class="option-card" data-value="2">
+            <div class="option-level">Level 2: Professional</div>
+            <div class="option-text">Meeting expectations are consistently communicated across business units.</div>
+          </div>
+          
+          <div class="option-card" data-value="3">
+            <div class="option-level">Level 3: Effective</div>
+            <div class="option-text">Participation from everyone invited to a meeting is expected, encouraged, and supported by the meeting structures in use. Updated meeting practices are developed with input from various employee groups. Employees feel empowered to raise questions about meeting practices and performance.</div>
+          </div>
+          
+          <div class="option-card" data-value="4">
+            <div class="option-level">Level 4: Systematised</div>
+            <div class="option-text">Meetings incorporate organisation specific language and rituals that harmonise the organisational culture across business units. Employees and leaders assume joint ownership for meeting success. People are recognised for demonstrating effective meeting skills.</div>
+          </div>
+          
+          <div class="option-card" data-value="5">
+            <div class="option-level">Level 5: Optimised / World Class</div>
+            <div class="option-text">Meetings embody the organisation's declared culture. Meeting design efforts optimise for both business outcomes and cultural cohesion. Past meeting outcomes are reviewed and evaluated for net positive impact.</div>
+          </div>
+        </div>
+        
+        <div class="navigation">
+          <button class="btn btn-secondary" id="backBtn5">Back</button>
+          <button class="btn btn-primary" id="submitBtn">View Results</button>
+        </div>
+      </div>
 
-        function updateResults() {
-            const ratingCount = Object.keys(ratings).length;
-            
-            if (ratingCount > 0) {
-                document.getElementById('results').classList.add('show');
-                
-                const resultsList = document.getElementById('resultsList');
-                resultsList.innerHTML = '';
-                
-                let total = 0;
-                let index = 0;
-                
-                for (const [area, value] of Object.entries(ratings)) {
-                    const div = document.createElement('div');
-                    div.className = 'result-item';
-                    div.innerHTML = `
-                        <span class="result-label">${focusAreas[index]}</span>
-                        <span class="result-value">${value}</span>
-                    `;
-                    resultsList.appendChild(div);
-                    total += value;
-                    index++;
-                }
+      <!-- Results Slide -->
+      <div class="slide" id="resultsSlide">
+        <div class="results-container">
+          <h2>Your Meeting Maturity Assessment</h2>
+          <div class="results-score" id="totalScore">0</div>
+          <div class="results-label" id="maturityLabel">Assessment Complete</div>
+          
+          <div class="results-breakdown">
+            <h3>Score Breakdown</h3>
+            <div class="result-item">
+              <span class="result-area">Meeting Design</span>
+              <span class="result-score" id="score1">-</span>
+            </div>
+            <div class="result-item">
+              <span class="result-area">Meeting Skills</span>
+              <span class="result-score" id="score2">-</span>
+            </div>
+            <div class="result-item">
+              <span class="result-area">Stakeholder Satisfaction</span>
+              <span class="result-score" id="score3">-</span>
+            </div>
+            <div class="result-item">
+              <span class="result-area">Facilities, Technology and Resources</span>
+              <span class="result-score" id="score4">-</span>
+            </div>
+            <div class="result-item">
+              <span class="result-area">Cultural Ownership</span>
+              <span class="result-score" id="score5">-</span>
+            </div>
+          </div>
+          
+          <button class="btn btn-restart" id="restartBtn">Start New Assessment</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-                 if (ratingCount === 5 && total === 1 ) {
-                    document.getElementById('average').innerHTML = `
-                        <div style="font-size: 26px; margin: 15px 0; font-weight: 500;">Overall Score: ${total}</div>
-                        <div><p style="padding: 10px 0;">Your meeting maturity is very low.</p></div>
-                    `;
-                } else if (ratingCount === 5 && total === 2 ) {
-                    document.getElementById('average').innerHTML = `
-                        <div style="font-size: 26px; margin: 15px 0; font-weight: 500;">Overall Score: ${total}</div>
-                        <div><p style="padding: 10px 0;">Your meeting maturity is low.</p></div>
+  <script>
+    const ratings = {};
+    const slides = document.querySelectorAll('.slide');
+    let currentSlide = 0;
 
-                    `;
-                }  else if  (ratingCount === 5 && total === 3 ) {
-                    document.getElementById('average').innerHTML = `
-                        <div style="font-size: 26px; margin: 15px 0; font-weight: 500;">Overall Score: ${total}</div>
-                        <div><p style="padding: 10px 0;">Your meeting maturity is average.</p></div>
-                    `;
-                }   else if  (ratingCount === 5 && total === 4 ) {
-                    document.getElementById('average').innerHTML = `
-                        <div style="font-size: 26px; margin: 15px 0; font-weight: 500;">Overall Score: ${total}</div>
-                        <div><p style="padding: 10px 0;">Your meeting maturity is higher than average.</p></div>
-                    `;
-                }  else if  (ratingCount === 5 && total === 5 ) {
-                    document.getElementById('average').innerHTML = `
-                        <div style="font-size: 26px; margin: 15px 0; font-weight: 500;">Overall Score: ${total}</div>
-                        <div><p style="padding: 10px 0;">Your meeting maturity is excellent.</p></div>
-                    `;
-                } else {
-                    document.getElementById('average').innerHTML = `
-                        <div style="font-size: 16px;">Complete all ratings to see your total score</div>
-                        <div style="margin-top: 8px; font-size: 14px; opacity: 0.9;">${ratingCount} of 5 completed</div>
-                    `;
-                }
-            } else {
-                document.getElementById('results').classList.remove('show');
-            }
+    const areaNames = [
+      'Meeting Design',
+      'Meeting Skills', 
+      'Stakeholder Satisfaction',
+      'Facilities, Technology and Resources',
+      'Cultural Ownership'
+    ];
+
+    // Set up option selection for all slides
+    document.querySelectorAll('.option-card').forEach(card => {
+      card.addEventListener('click', function() {
+        const slide = this.closest('.slide');
+        const area = slide.dataset.area;
+        const value = parseInt(this.dataset.value);
+        
+        // Remove selected class from siblings
+        slide.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+        
+        // Add selected class to clicked card
+        this.classList.add('selected');
+        
+        // Store rating
+        ratings[area] = value;
+        
+        // Enable next button for current slide
+        const slideIndex = Array.from(slides).indexOf(slide);
+        const nextBtn = document.getElementById(`nextBtn${slideIndex + 1}`) || document.getElementById('submitBtn');
+        if (nextBtn) {
+          nextBtn.disabled = false;
         }
-    </script>
+      });
+    });
+
+    // Navigation functions
+    function showSlide(index) {
+      slides.forEach(slide => slide.classList.remove('active'));
+      slides[index].classList.add('active');
+      currentSlide = index;
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const progress = ((currentSlide) / 5) * 100;
+      document.getElementById('progressBar').style.width = progress + '%';
+    }
+
+    // Next buttons
+    for (let i = 1; i <= 5; i++) {
+      const btn = document.getElementById(`nextBtn${i}`);
+      if (btn) {
+        btn.addEventListener('click', () => showSlide(currentSlide + 1));
+      }
+    }
+
+    // Back buttons
+    for (let i = 2; i <= 5; i++) {
+      const btn = document.getElementById(`backBtn${i}`);
+      if (btn) {
+        btn.addEventListener('click', () => showSlide(currentSlide - 1));
+      }
+    }
+
+    // Submit button
+    document.getElementById('submitBtn').addEventListener('click', () => {
+      calculateResults();
+      showSlide(5);
+    });
+
+    // Restart button
+    document.getElementById('restartBtn').addEventListener('click', () => {
+      Object.keys(ratings).forEach(key => delete ratings[key]);
+      document.querySelectorAll('.option-card').forEach(card => card.classList.remove('selected'));
+      document.querySelectorAll('.btn-primary').forEach(btn => btn.disabled = true);
+      showSlide(0);
+    });
+
+    function calculateResults() {
+      const total = Object.values(ratings).reduce((sum, val) => sum + val, 0);
+      const average = (total / 5).toFixed(1);
+      
+      document.getElementById('totalScore').textContent = average;
+      
+      // Set maturity label
+      let label = '';
+      if (average < 1.5) label = 'Level 1: Individual - Meeting competency is not an area of organisational focus';
+      else if (average < 2.5) label = 'Level 2: Professional - Professional meeting standards are established';
+      else if (average < 3.5) label = 'Level 3: Effective - Meeting processes are defined for specific outcomes';
+      else if (average < 4.5) label = 'Level 4: Systematised - Processes are harmonised organisation-wide';
+      else label = 'Level 5: Optimised / World Class - Meetings are fully aligned with strategy';
+      
+      document.getElementById('maturityLabel').textContent = label;
+      
+      // Display individual scores
+      const areas = ['meeting-design', 'meeting-skills', 'stakeholder-satisfaction', 'facilities-technology', 'cultural-ownership'];
+      areas.forEach((area, index) => {
+        const scoreElement = document.getElementById(`score${index + 1}`);
+        scoreElement.textContent = ratings[area] || '-';
+      });
+      
+      updateProgress();
+    }
+
+    // Initialize
+    updateProgress();
+  </script>
 </body>
 </html>
